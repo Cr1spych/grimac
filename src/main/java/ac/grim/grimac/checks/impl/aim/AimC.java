@@ -39,7 +39,7 @@ public class AimC extends Check implements RotationCheck {
         if (hasDuplicatedXRots || hasDuplicatedYRots) {
             buffer++;
         } else {
-            buffer = Math.max(0, buffer - 0.5f);
+            buffer = Math.max(0, buffer - 0.01f);
         }
 
         if (buffer > 1) {
@@ -49,7 +49,7 @@ public class AimC extends Check implements RotationCheck {
             deltaYRots.clear();
         }
 
-        if (deltaXRots.size() > 51) deltaXRots.remove(0);
-        if (deltaYRots.size() > 51) deltaYRots.remove(0);
+        if (deltaXRots.size() > 60) deltaXRots.remove(0);
+        if (deltaYRots.size() > 60) deltaYRots.remove(0);
     }
 }

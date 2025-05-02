@@ -1,4 +1,11 @@
 package ac.grim.grimac.checks.impl.aim.utils.millenium;
 
-public class Pair {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public final class Pair<X, Y> {
+    private X x;
+    private Y y;
 }
