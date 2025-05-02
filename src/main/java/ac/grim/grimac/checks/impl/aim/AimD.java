@@ -20,27 +20,34 @@ public class AimD extends Check implements RotationCheck {
         super(player);
     }
 
+    private float xRotBuffer, yRotBuffer;
+
     @Override
     public void process(RotationUpdate rotationUpdate) {
         float deltaXRot = rotationUpdate.getDeltaXRotABS();
         float deltaYRot = rotationUpdate.getDeltaYRotABS();
-        if (deltaXRot < 0.35 || deltaYRot < 0.35 || rotationUpdate.isCinematic() || player.inVehicle()) {
+        if (rotationUpdate.isCinematic() || player.inVehicle()) {
             return;
         }
 
         deltaXRots.add(deltaXRot);
         deltaYRots.add(deltaYRot);
 
-        if (deltaXRots.size() > 5) {
-            float averageXRot = AimUtils.getAverage(deltaXRots);
-            debugUtil.debugTo(player, "AverageX: " + averageXRot, true);
-            deltaXRots.clear();
+        float kurtosisYRot = Math.abs(AimUtils.getKurtosis(deltaYRots));
+        float kurtosisXRot = Math.abs(AimUtils.getKurtosis(deltaXRots));
+
+        if (deltaXRots.size() > 30) {
+            if (kurtosisXRot < 1.5) {
+                flagAndAlert();
+                deltaXRots.clear();
+            }
         }
 
-        if (deltaYRots.size() > 5) {
-            float averageYRot = AimUtils.getAverage(deltaYRots);
-            debugUtil.debugTo(player, "AverageY: " + averageYRot, true);
-            deltaYRots.clear();
+        if (deltaYRots.size() > 30) {
+            if (kurtosisYRot < 1.5) {
+                flagAndAlert();
+                deltaYRots.clear();
+            }
         }
     }
 }

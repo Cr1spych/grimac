@@ -2,35 +2,42 @@ package ac.grim.grimac.checks.impl.aim;
 
 import ac.grim.grimac.checks.Check;
 import ac.grim.grimac.checks.CheckData;
+import ac.grim.grimac.checks.impl.aim.utils.AimUtils;
 import ac.grim.grimac.checks.type.RotationCheck;
 import ac.grim.grimac.player.GrimPlayer;
 import ac.grim.grimac.utils.anticheat.update.RotationUpdate;
 
-@CheckData(name = "AimC")
+import java.util.ArrayList;
+import java.util.List;
+
+@CheckData(name = "AimF")
 public class AimC extends Check implements RotationCheck {
+
+    List<Float> deltaXRots = new ArrayList<>();
+    List<Float> deltaYRots = new ArrayList<>();
+
     public AimC(GrimPlayer player) {
         super(player);
     }
-
-    private float buffer;
 
     @Override
     public void process(RotationUpdate rotationUpdate) {
         float deltaXRot = rotationUpdate.getDeltaXRotABS();
         float deltaYRot = rotationUpdate.getDeltaYRotABS();
-
-        if (rotationUpdate.isCinematic() || player.inVehicle()) {
+        if (deltaXRot < 0.45 || deltaYRot < 0.45 || rotationUpdate.isCinematic() || player.inVehicle()) {
             return;
         }
 
-        if ((deltaXRot < 10.0E-5 && deltaXRot != 0.0) || (deltaYRot < 10.0E-5 && deltaYRot != 0)) {
-            buffer++;
-        } else {
-            buffer = Math.max(0, buffer - 0.2f);
-        }
-        if (buffer > 1) {
+        deltaXRots.add(deltaXRot);
+        deltaYRots.add(deltaYRot);
+
+        boolean hasDuplicatedXRots = AimUtils.hasDuplicates(deltaXRots, 25) && deltaXRots.size() > 50;
+        boolean hasDuplicatedYRots = AimUtils.hasDuplicates(deltaYRots, 25) && deltaYRots.size() > 50;
+
+        if (hasDuplicatedXRots || hasDuplicatedYRots) {
             flagAndAlert();
-            buffer = 0;
+            deltaYRots.clear();
+            deltaXRots.clear();
         }
     }
 }
