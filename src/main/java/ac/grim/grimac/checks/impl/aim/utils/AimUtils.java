@@ -1,0 +1,49 @@
+package ac.grim.grimac.checks.impl.aim.utils;
+
+import java.util.List;
+
+// GPT MONSTER CODE WWW YOOOO
+public class AimUtils {
+
+    public static float getAverage(List<Float> list) {
+        if (list.isEmpty()) return 0f;
+
+        float sum = 0f;
+        for (float value : list) {
+            sum += value;
+        }
+        return sum / list.size();
+    }
+
+    public static boolean hasDuplicates(List<Float> list, int threshold) {
+        for (int i = 0; i < list.size(); i++) {
+            float value = list.get(i);
+            int count = 1;
+
+            for (int j = i + 1; j < list.size(); j++) {
+                if (Float.compare(value, list.get(j)) == 0) {
+                    count++;
+                    if (count >= threshold) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean hasConsecutiveRepeats(List<Float> list, int threshold) {
+        if (list.size() < threshold) return false;
+
+        int count = 1;
+        for (int i = 1; i < list.size(); i++) {
+            if (Float.compare(list.get(i), list.get(i - 1)) == 0) {
+                count++;
+                if (count >= threshold) return true;
+            } else {
+                count = 1;
+            }
+        }
+        return false;
+    }
+}
