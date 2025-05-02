@@ -37,14 +37,14 @@ public class AimD extends Check implements RotationCheck {
         float kurtosisXRot = Math.abs(AimUtils.getKurtosis(deltaXRots));
 
         if (deltaXRots.size() > 30) {
-            if (kurtosisXRot < 1.5) {
+            if (kurtosisXRot < 2 && kurtosisXRot != 0) {
                 flagAndAlert();
                 deltaXRots.clear();
             }
         }
 
         if (deltaYRots.size() > 30) {
-            if (kurtosisYRot < 1.5) {
+            if (kurtosisYRot < 2 && kurtosisYRot != 0) {
                 flagAndAlert();
                 deltaYRots.clear();
             }
