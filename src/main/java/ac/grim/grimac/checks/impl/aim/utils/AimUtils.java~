@@ -51,25 +51,4 @@ public class AimUtils {
         if (b == 0) return a;
         return getGCD(b, a % b);
     }
-
-    public static double getKurtosis(List<Float> values) {
-        int n = values.size();
-        if (n < 4) return 0.0;
-
-        double mean = values.stream().mapToDouble(f -> f).average().orElse(0.0);
-        double m2 = 0.0, m4 = 0.0;
-
-        for (float val : values) {
-            double diff = val - mean;
-            m2 += diff * diff;
-            m4 += diff * diff * diff * diff;
-        }
-
-        m2 /= n;
-        m4 /= n;
-
-        if (m2 == 0) return 0.0; // избегаем деления на ноль
-
-        return m4 / (m2 * m2);
-    }
 }
