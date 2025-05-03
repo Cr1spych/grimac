@@ -20,7 +20,7 @@ public class AimA extends Check implements RotationCheck {
         float deltaXRot = rotationUpdate.getDeltaXRotABS();
         float deltaYRot = rotationUpdate.getDeltaYRotABS();
 
-        if ((deltaXRot > 55 && lastDeltaXRot < 1) || (deltaYRot > 55 && lastDeltaYRot < 1.0)) {
+        if ((deltaXRot > 45 && lastDeltaXRot < 1.7) || (deltaYRot > 40 && lastDeltaYRot < 1.7)) {
             buffer++;
         } else {
             buffer = Math.max(0, buffer - 0.05f);

@@ -15,4 +15,8 @@ public class DebugUtil {
             player.sendMessage(message);
         }
     }
+
+    public void debugTo(GrimPlayer player, String message) {
+        player.sendMessage("§7[DEBUG] §f" + message);
+    }
 }

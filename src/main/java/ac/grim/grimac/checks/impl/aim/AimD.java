@@ -13,41 +13,33 @@ import java.util.List;
 @CheckData(name = "AimD")
 public class AimD extends Check implements RotationCheck {
 
-    List<Float> deltaXRots = new ArrayList<>();
-    List<Float> deltaYRots = new ArrayList<>();
+    private final List<Float> deltaXRots = new ArrayList<>();
+    private final List<Float> deltaYRots = new ArrayList<>();
 
     public AimD(GrimPlayer player) {
         super(player);
     }
 
-    private float xRotBuffer, yRotBuffer;
-
     @Override
     public void process(RotationUpdate rotationUpdate) {
         float deltaXRot = rotationUpdate.getDeltaXRotABS();
         float deltaYRot = rotationUpdate.getDeltaYRotABS();
-        if (rotationUpdate.isCinematic() || player.inVehicle()) {
-            return;
-        }
+
+        if (rotationUpdate.isCinematic() || player.inVehicle()) return;
 
         deltaXRots.add(deltaXRot);
         deltaYRots.add(deltaYRot);
 
-        float kurtosisYRot = Math.abs(AimUtils.getKurtosis(deltaYRots));
-        float kurtosisXRot = Math.abs(AimUtils.getKurtosis(deltaXRots));
+        if (deltaXRots.size() > 30 && deltaYRots.size() > 30) {
+            float kurtosisX = Math.abs(AimUtils.getKurtosis(deltaXRots));
+            float kurtosisY = Math.abs(AimUtils.getKurtosis(deltaYRots));
 
-        if (deltaXRots.size() > 30) {
-            if (kurtosisXRot < 2 && kurtosisXRot != 0) {
+            if ((kurtosisX < 1.5 && kurtosisX != 0.0) && (kurtosisY < 1.5 && kurtosisY != 0.0)) {
                 flagAndAlert();
-                deltaXRots.clear();
             }
-        }
 
-        if (deltaYRots.size() > 30) {
-            if (kurtosisYRot < 2 && kurtosisYRot != 0) {
-                flagAndAlert();
-                deltaYRots.clear();
-            }
+            deltaXRots.clear();
+            deltaYRots.clear();
         }
     }
 }
