@@ -39,7 +39,7 @@ public class AimC extends Check implements RotationCheck {
         if (hasDuplicatedXRots || hasDuplicatedYRots) {
             buffer++;
         } else {
-            buffer = Math.max(0, buffer - 0.005f);
+            buffer = Math.max(0, buffer - 0.0005f);
         }
 
         if (buffer > 1) {

@@ -80,4 +80,18 @@ public class AimUtils {
 
         return efficiencyFirst * (varianceSquared / (float)Math.pow(variance / sum, 2.0f)) - efficiencySecond;
     }
+
+    public static boolean hasTooManyExceeding(List<Float> list, float limit, int threshold) {
+        int count = 0;
+
+        for (Float value : list) {
+            if (value > limit) {
+                count++;
+                if (count >= threshold) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

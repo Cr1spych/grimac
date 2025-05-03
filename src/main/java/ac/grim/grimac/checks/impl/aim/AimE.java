@@ -13,6 +13,8 @@ public class AimE extends Check implements RotationCheck {
         super(player);
     }
 
+    private float buffer;
+
     @Override
     public void process(RotationUpdate rotationUpdate) {
         float deltaXRot = rotationUpdate.getDeltaXRotABS();
@@ -22,7 +24,13 @@ public class AimE extends Check implements RotationCheck {
         boolean isYRounded = deltaYRot == 1.0 || deltaYRot == 2.0 || deltaYRot == 3.0 || deltaYRot == 4.0 || deltaYRot == 5.0;
 
         if (isYRounded || isXRounded) {
+            buffer++;
+        } else {
+            buffer = Math.max(0, buffer - 0.05f);
+        }
+        if (buffer > 2) {
             flagAndAlert();
+            buffer = 2;
         }
     }
 }
