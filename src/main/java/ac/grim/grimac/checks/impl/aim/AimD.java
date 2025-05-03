@@ -44,8 +44,6 @@ public class AimD extends Check implements RotationCheck {
             final List<Float> jiffB = Statistics.getJiffDelta(linearPredict, 2);
             final double r = Math.abs(Statistics.getRSquared(jiffA, jiffB));
 
-            player.sendMessage("R2=" + r);
-
             stack.clear();
         }
     }

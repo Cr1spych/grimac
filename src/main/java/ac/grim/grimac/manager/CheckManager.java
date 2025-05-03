@@ -5,13 +5,13 @@ import ac.grim.grimac.checks.impl.aim.*;
 import ac.grim.grimac.checks.impl.aim.grim.AimDuplicateLook;
 import ac.grim.grimac.checks.impl.aim.grim.AimModulo360;
 import ac.grim.grimac.checks.impl.aim.processor.AimProcessor;
+import ac.grim.grimac.checks.impl.autoclicker.AutoclickerA;
 import ac.grim.grimac.checks.impl.badpackets.*;
 import ac.grim.grimac.checks.impl.breaking.*;
 import ac.grim.grimac.checks.impl.combat.Hitboxes;
 import ac.grim.grimac.checks.impl.combat.MultiInteractA;
 import ac.grim.grimac.checks.impl.combat.MultiInteractB;
 import ac.grim.grimac.checks.impl.combat.Reach;
-import ac.grim.grimac.checks.impl.combat.autoclicker.*;
 import ac.grim.grimac.checks.impl.crash.*;
 import ac.grim.grimac.checks.impl.elytra.*;
 import ac.grim.grimac.checks.impl.exploit.ExploitA;
@@ -83,6 +83,7 @@ public class CheckManager {
         // Include post checks in the packet check too
         packetChecks = new ImmutableClassToInstanceMap.Builder<PacketCheck>()
                 .put(Hitboxes.class, new Hitboxes(player))
+                .put(AutoclickerA.class, new AutoclickerA(player))
                 .put(Reach.class, new Reach(player))
                 .put(PacketEntityReplication.class, new PacketEntityReplication(player))
                 .put(PacketChangeGameState.class, new PacketChangeGameState(player))
@@ -93,15 +94,6 @@ public class CheckManager {
                 .put(TeamHandler.class, new TeamHandler(player))
                 .put(ClientBrand.class, new ClientBrand(player))
                 .put(NoFall.class, new NoFall(player))
-                .put(AutoClickerA.class, new AutoClickerA(player))
-                .put(AutoClickerB.class, new AutoClickerB(player))
-                .put(AutoClickerC.class, new AutoClickerC(player))
-                .put(AutoClickerD.class, new AutoClickerD(player))
-                .put(AutoClickerE.class, new AutoClickerE(player))
-                .put(AutoClickerF.class, new AutoClickerF(player))
-                .put(AutoClickerH.class, new AutoClickerH(player))
-                .put(AutoClickerI.class, new AutoClickerI(player))
-                .put(AutoClickerL.class, new AutoClickerL(player))
                 .put(BadPacketsO.class, new BadPacketsO(player))
                 .put(BadPacketsA.class, new BadPacketsA(player))
                 .put(BadPacketsC.class, new BadPacketsC(player))

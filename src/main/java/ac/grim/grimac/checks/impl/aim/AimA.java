@@ -30,13 +30,13 @@ public class AimA extends Check implements RotationCheck {
         deltaXRots.add(deltaXRot);
         deltaYRots.add(deltaYRot);
 
-        boolean validSize = deltaXRots.size() >= 3 && deltaYRots.size() >= 3;
-        boolean hasExceeding = AimUtils.hasTooManyExceeding(deltaXRots, 45, 2) && AimUtils.hasTooManyExceeding(deltaYRots, 40, 3) && validSize;
+        boolean validSize = deltaXRots.size() >= 2 && deltaYRots.size() >= 2;
+        boolean hasExceeding = AimUtils.hasTooManyExceeding(deltaXRots, 45, 2) && AimUtils.hasTooManyExceeding(deltaYRots, 40, 2) && validSize;
 
-        if (((deltaXRot > 45 && lastDeltaXRot < 2.0) || (deltaYRot > 40 && lastDeltaYRot < 2.0)) && !hasExceeding) {
+        if (((deltaXRot > 50 && lastDeltaXRot < 2.1) || (deltaYRot > 45 && lastDeltaYRot < 2.1)) && !hasExceeding && player.actionManager.hasAttackedSince(120)) {
             buffer++;
         } else {
-            buffer = Math.max(0, buffer - 0.02f);
+            buffer = Math.max(0, buffer - 0.04f);
         }
         if (buffer > 1) {
             flagAndAlert();
@@ -46,7 +46,7 @@ public class AimA extends Check implements RotationCheck {
         lastDeltaXRot = deltaXRot;
         lastDeltaYRot = deltaYRot;
 
-        if (deltaXRots.size() > 3) deltaXRots.remove(0);
-        if (deltaYRots.size() > 3) deltaYRots.remove(0);
+        if (deltaXRots.size() > 2) deltaXRots.remove(0);
+        if (deltaYRots.size() > 2) deltaYRots.remove(0);
     }
 }
