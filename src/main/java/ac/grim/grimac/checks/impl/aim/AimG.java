@@ -10,17 +10,16 @@ import ac.grim.grimac.utils.anticheat.update.RotationUpdate;
 import java.util.ArrayList;
 import java.util.List;
 
-@CheckData(name = "AimD")
-public class AimD extends Check implements RotationCheck {
+// TEST CHECK
+@CheckData(name = "AimG")
+public class AimG extends Check implements RotationCheck {
 
     private final List<Float> deltaXRots = new ArrayList<>();
     private final List<Float> deltaYRots = new ArrayList<>();
 
-    public AimD(GrimPlayer player) {
+    public AimG(GrimPlayer player) {
         super(player);
     }
-
-    private float buffer;
 
     @Override
     public void process(RotationUpdate rotationUpdate) {
@@ -33,20 +32,14 @@ public class AimD extends Check implements RotationCheck {
         deltaXRots.add(deltaXRot);
         deltaYRots.add(deltaYRot);
 
-        boolean validSize = deltaXRots.size() >= 15 && deltaYRots.size() >= 15;
-        boolean hasAlternatingPattern = AimUtils.hasAlternatingPattern(deltaXRots) || AimUtils.hasAlternatingPattern(deltaYRots);
+        boolean validSize = deltaXRots.size() >= 12 && deltaYRots.size() >= 12;
+        boolean hasRepeatingPattern = AimUtils.hasRepeatingPattern(deltaXRots, 6) || AimUtils.hasRepeatingPattern(deltaYRots, 6);
 
-        if (hasAlternatingPattern && validSize) {
-            buffer++;
-        } else {
-            buffer = Math.max(0, buffer - 0.02f);
-        }
-        if (buffer > 2) {
+        if (hasRepeatingPattern && validSize) {
             flagAndAlert();
-            buffer = 1;
         }
 
-        if (deltaXRots.size() > 15) deltaXRots.remove(0);
-        if (deltaYRots.size() > 15) deltaYRots.remove(0);
+        if (deltaXRots.size() > 12) deltaXRots.remove(0);
+        if (deltaYRots.size() > 12) deltaYRots.remove(0);
     }
 }

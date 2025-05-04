@@ -32,10 +32,10 @@ public class AutoclickerA extends Check implements PacketCheck {
                     if (delay == lastDelay && delay > 0) {
                         buffer++;
                     } else {
-                        buffer = Math.max(0, buffer - 0.5f);
+                        buffer = Math.max(0, buffer - 0.4f);
                     }
 
-                    if (buffer > 4) {
+                    if (buffer > 3) {
                         buffer = 2;
                     }
 

@@ -103,4 +103,19 @@ public class AimUtils {
         }
         return true;
     }
+
+    public static boolean hasRepeatingPattern(List<Float> list, int patternSize) {
+        if (list.size() < patternSize * 2) return false;
+
+        for (int i = 0; i < list.size() - patternSize; i++) {
+            for (int j = 0; j < patternSize; j++) {
+                if (i + patternSize + j >= list.size()) return false;
+                if (!Float.valueOf(list.get(i + j)).equals(list.get(i + patternSize + j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 }

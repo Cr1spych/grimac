@@ -140,6 +140,7 @@ public class CheckManager {
                 .put(AimD.class, new AimD(player))
                 .put(AimE.class, new AimE(player))
                 .put(AimF.class, new AimF(player))
+                .put(AimG.class, new AimG(player))
                 .put(AimProcessor.class, new AimProcessor(player))
                 .put(AimModulo360.class, new AimModulo360(player))
                 .put(AimDuplicateLook.class, new AimDuplicateLook(player))
