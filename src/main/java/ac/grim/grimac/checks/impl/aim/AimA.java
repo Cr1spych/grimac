@@ -31,9 +31,9 @@ public class AimA extends Check implements RotationCheck {
         deltaYRots.add(deltaYRot);
 
         boolean validSize = deltaXRots.size() >= 2 && deltaYRots.size() >= 2;
-        boolean hasExceeding = AimUtils.hasTooManyExceeding(deltaXRots, 45, 2) && AimUtils.hasTooManyExceeding(deltaYRots, 40, 2) && validSize;
+        boolean hasExceeding = AimUtils.hasTooManyExceeding(deltaXRots, 45, 2) || AimUtils.hasTooManyExceeding(deltaYRots, 40, 2) && validSize;
 
-        if (((deltaXRot > 50 && lastDeltaXRot < 2.1) || (deltaYRot > 45 && lastDeltaYRot < 2.1)) && !hasExceeding && player.actionManager.hasAttackedSince(120)) {
+        if (((deltaXRot > 50 && lastDeltaXRot < 3.5) || (deltaYRot > 45 && lastDeltaYRot < 3.5)) && !hasExceeding && player.actionManager.hasAttackedSince(70)) {
             buffer++;
         } else {
             buffer = Math.max(0, buffer - 0.04f);

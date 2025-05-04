@@ -30,7 +30,7 @@ public class AimE extends Check implements RotationCheck {
         }
         if (buffer > 2) {
             flagAndAlert();
-            buffer = 2;
+            buffer = 1;
         }
     }
 }

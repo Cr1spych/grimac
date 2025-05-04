@@ -48,39 +48,6 @@ public class AimUtils {
         return false;
     }
 
-    public static int getGCD(int a, int b) {
-        if (b == 0) return a;
-        return getGCD(b, a % b);
-    }
-
-    public static float getKurtosis(final Collection<? extends Number> data) {
-        float sum = 0.0f;
-        int count = 0;
-
-        for (final Number number : data) {
-            sum += number.floatValue();
-            ++count;
-        }
-
-        if (count < 3) {
-            return 0.0f;
-        }
-
-        final float efficiencyFirst = count * (count + 1.0f) / ((count - 1.0f) * (count - 2.0f) * (count - 3.0f));
-        final float efficiencySecond = 3.0f * (float)Math.pow(count - 1.0f, 2.0f) / ((count - 2.0f) * (count - 3.0f));
-        final float average = sum / count;
-
-        float variance = 0.0f;
-        float varianceSquared = 0.0f;
-
-        for (final Number number : data) {
-            variance += (float)Math.pow(average - number.floatValue(), 2.0f);
-            varianceSquared += (float)Math.pow(average - number.floatValue(), 4.0f);
-        }
-
-        return efficiencyFirst * (varianceSquared / (float)Math.pow(variance / sum, 2.0f)) - efficiencySecond;
-    }
-
     public static boolean hasTooManyExceeding(List<Float> list, float limit, int threshold) {
         int count = 0;
 
@@ -93,5 +60,17 @@ public class AimUtils {
             }
         }
         return false;
+    }
+
+    public static boolean hasAllEqual(List<Float> list) {
+        if (list.isEmpty()) return false;
+
+        float first = list.get(0);
+        for (float val : list) {
+            if (Float.compare(val, first) != 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
