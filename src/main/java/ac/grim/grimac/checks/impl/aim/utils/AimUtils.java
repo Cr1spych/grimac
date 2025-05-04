@@ -1,6 +1,5 @@
 package ac.grim.grimac.checks.impl.aim.utils;
 
-import java.util.Collection;
 import java.util.List;
 
 // GPT MONSTER CODE WWW YOOOO
@@ -68,6 +67,37 @@ public class AimUtils {
         float first = list.get(0);
         for (float val : list) {
             if (Float.compare(val, first) != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static float getMax(List<Float> list) {
+        if (list.isEmpty()) return 0f;
+        float max = Float.MIN_VALUE;
+        for (float value : list) {
+            if (value > max) {
+                max = value;
+            }
+        }
+        return max;
+    }
+
+    public static float getMin(List<Float> list) {
+        if (list.isEmpty()) return 0f;
+        float min = Float.MAX_VALUE;
+        for (float value : list) {
+            if (value < min) {
+                min = value;
+            }
+        }
+        return min;
+    }
+
+    public static boolean hasAlternatingPattern(List<Float> list) {
+        for (int i = 2; i < list.size(); i++) {
+            if (!Float.valueOf(list.get(i)).equals(list.get(i - 2))) {
                 return false;
             }
         }

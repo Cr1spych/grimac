@@ -26,6 +26,9 @@ public class AimA extends Check implements RotationCheck {
     public void process(RotationUpdate rotationUpdate) {
         float deltaXRot = rotationUpdate.getDeltaXRotABS();
         float deltaYRot = rotationUpdate.getDeltaYRotABS();
+        if (rotationUpdate.isCinematic() || player.inVehicle()) {
+            return;
+        }
 
         deltaXRots.add(deltaXRot);
         deltaYRots.add(deltaYRot);
@@ -33,10 +36,10 @@ public class AimA extends Check implements RotationCheck {
         boolean validSize = deltaXRots.size() >= 2 && deltaYRots.size() >= 2;
         boolean hasExceeding = AimUtils.hasTooManyExceeding(deltaXRots, 45, 2) || AimUtils.hasTooManyExceeding(deltaYRots, 40, 2) && validSize;
 
-        if (((deltaXRot > 50 && lastDeltaXRot < 3.5) || (deltaYRot > 45 && lastDeltaYRot < 3.5)) && !hasExceeding && player.actionManager.hasAttackedSince(70)) {
+        if (((deltaXRot > 50 && lastDeltaXRot < 3.5) || (deltaYRot > 45 && lastDeltaYRot < 3.5)) && !hasExceeding && player.actionManager.hasAttackedSince(80)) {
             buffer++;
         } else {
-            buffer = Math.max(0, buffer - 0.04f);
+            buffer = Math.max(0, buffer - 0.009f);
         }
         if (buffer > 1) {
             flagAndAlert();

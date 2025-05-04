@@ -18,6 +18,7 @@ import ac.grim.grimac.checks.impl.exploit.ExploitA;
 import ac.grim.grimac.checks.impl.exploit.ExploitB;
 import ac.grim.grimac.checks.impl.exploit.ExploitC;
 import ac.grim.grimac.checks.impl.groundspoof.NoFall;
+import ac.grim.grimac.checks.impl.inventory.InventoryA;
 import ac.grim.grimac.checks.impl.misc.ClientBrand;
 import ac.grim.grimac.checks.impl.misc.GhostBlockMitigation;
 import ac.grim.grimac.checks.impl.misc.TransactionOrder;
@@ -83,6 +84,7 @@ public class CheckManager {
         // Include post checks in the packet check too
         packetChecks = new ImmutableClassToInstanceMap.Builder<PacketCheck>()
                 .put(Hitboxes.class, new Hitboxes(player))
+                .put(InventoryA.class, new InventoryA(player))
                 .put(AutoclickerA.class, new AutoclickerA(player))
                 .put(Reach.class, new Reach(player))
                 .put(PacketEntityReplication.class, new PacketEntityReplication(player))

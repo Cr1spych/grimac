@@ -25,6 +25,9 @@ public class AimC extends Check implements RotationCheck {
     public void process(RotationUpdate rotationUpdate) {
         float deltaXRot = rotationUpdate.getDeltaXRotABS();
         float deltaYRot = rotationUpdate.getDeltaYRotABS();
+        if (rotationUpdate.isCinematic() || player.inVehicle()) {
+            return;
+        }
 
         if (deltaXRot < 0.45 || deltaYRot < 0.45 || rotationUpdate.isCinematic() || player.inVehicle()) {
             return;
