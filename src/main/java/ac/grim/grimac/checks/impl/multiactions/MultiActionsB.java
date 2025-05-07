@@ -13,7 +13,7 @@ import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientPl
 
 import static ac.grim.grimac.events.packets.patch.ResyncWorldUtil.resyncPosition;
 
-@CheckData(name = "MultiActionsB", description = "Breaking blocks while using an item", experimental = true)
+@CheckData(name = "MultiActionsB", description = "Breaking blocks while using an item")
 public class MultiActionsB extends Check implements PacketCheck {
     public MultiActionsB(GrimPlayer player) {
         super(player);

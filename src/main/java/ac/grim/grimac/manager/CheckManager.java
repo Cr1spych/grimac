@@ -18,6 +18,8 @@ import ac.grim.grimac.checks.impl.exploit.ExploitA;
 import ac.grim.grimac.checks.impl.exploit.ExploitB;
 import ac.grim.grimac.checks.impl.exploit.ExploitC;
 import ac.grim.grimac.checks.impl.groundspoof.NoFall;
+import ac.grim.grimac.checks.impl.inventory.InventoryA;
+import ac.grim.grimac.checks.impl.inventory.InventoryB;
 import ac.grim.grimac.checks.impl.misc.ClientBrand;
 import ac.grim.grimac.checks.impl.misc.GhostBlockMitigation;
 import ac.grim.grimac.checks.impl.misc.TransactionOrder;
@@ -116,11 +118,13 @@ public class CheckManager {
                 .put(BadPacketsV.class, new BadPacketsV(player))
                 .put(BadPacketsW.class, new BadPacketsW(player))
                 .put(BadPacketsY.class, new BadPacketsY(player))
+                .put(InventoryA.class, new InventoryA(player))
+                .put(InventoryB.class, new InventoryB(player))
                 .put(MultiActionsA.class, new MultiActionsA(player))
                 .put(MultiActionsB.class, new MultiActionsB(player))
                 .put(MultiActionsC.class, new MultiActionsC(player))
                 .put(MultiActionsD.class, new MultiActionsD(player))
-                .put(MultiActionsE.class, new MultiActionsE(player))
+                .put(MultiActionsD.class, new MultiActionsD(player))
                 .put(TransactionOrder.class, new TransactionOrder(player))
                 .put(SprintA.class, new SprintA(player))
                 .put(VehicleA.class, new VehicleA(player))
@@ -190,7 +194,7 @@ public class CheckManager {
                 .put(InvalidPlaceB.class, new InvalidPlaceB(player))
                 .put(AirLiquidPlace.class, new AirLiquidPlace(player))
                 .put(MultiPlace.class, new MultiPlace(player))
-                .put(MultiActionsF.class, new MultiActionsF(player))
+                .put(MultiActionsC.class, new MultiActionsC(player))
                 .put(FarPlace.class, new FarPlace(player))
                 .put(FabricatedPlace.class, new FabricatedPlace(player))
                 .put(PositionPlace.class, new PositionPlace(player))
