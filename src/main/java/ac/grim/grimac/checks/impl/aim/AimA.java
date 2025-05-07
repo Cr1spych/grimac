@@ -2,25 +2,19 @@ package ac.grim.grimac.checks.impl.aim;
 
 import ac.grim.grimac.checks.Check;
 import ac.grim.grimac.checks.CheckData;
-import ac.grim.grimac.checks.impl.aim.utils.AimUtils;
 import ac.grim.grimac.checks.type.RotationCheck;
 import ac.grim.grimac.player.GrimPlayer;
 import ac.grim.grimac.utils.anticheat.update.RotationUpdate;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @CheckData(name = "AimA")
 public class AimA extends Check implements RotationCheck {
-
-    private final List<Float> deltaXRots = new ArrayList<>();
-    private final List<Float> deltaYRots = new ArrayList<>();
 
     public AimA(GrimPlayer player) {
         super(player);
     }
 
-    private float lastDeltaXRot, lastDeltaYRot, buffer;
+    private float lastDeltaXRot, lastDeltaYRot, xRotExceeding, yRotExceeding;
+    private float buffer;
 
     @Override
     public void process(RotationUpdate rotationUpdate) {
@@ -30,11 +24,10 @@ public class AimA extends Check implements RotationCheck {
             return;
         }
 
-        deltaXRots.add(deltaXRot);
-        deltaYRots.add(deltaYRot);
+        if (deltaXRot > 35) xRotExceeding++; else xRotExceeding = 0;
+        if (deltaYRot > 30) yRotExceeding++; else yRotExceeding = 0;
 
-        boolean validSize = deltaXRots.size() >= 2 && deltaYRots.size() >= 2;
-        boolean hasExceeding = AimUtils.hasTooManyExceeding(deltaXRots, 45, 2) || AimUtils.hasTooManyExceeding(deltaYRots, 40, 2) && validSize;
+        boolean hasExceeding = xRotExceeding > 2 || yRotExceeding > 2;
 
         if (((deltaXRot > 50 && lastDeltaXRot < 3.5) || (deltaYRot > 45 && lastDeltaYRot < 3.5)) && !hasExceeding && player.actionManager.hasAttackedSince(80)) {
             buffer++;
@@ -48,8 +41,5 @@ public class AimA extends Check implements RotationCheck {
 
         lastDeltaXRot = deltaXRot;
         lastDeltaYRot = deltaYRot;
-
-        if (deltaXRots.size() > 2) deltaXRots.remove(0);
-        if (deltaYRots.size() > 2) deltaYRots.remove(0);
     }
 }

@@ -52,7 +52,7 @@ public class AimC extends Check implements RotationCheck {
             deltaYRots.clear();
         }
 
-        if (deltaXRots.size() > 60) deltaXRots.remove(0);
-        if (deltaYRots.size() > 60) deltaYRots.remove(0);
+        if (deltaXRots.size() > 50) deltaXRots.remove(0);
+        if (deltaYRots.size() > 50) deltaYRots.remove(0);
     }
 }

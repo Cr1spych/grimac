@@ -34,16 +34,19 @@ public class AimD extends Check implements RotationCheck {
         deltaYRots.add(deltaYRot);
 
         boolean validSize = deltaXRots.size() >= 15 && deltaYRots.size() >= 15;
-        boolean hasAlternatingPattern = AimUtils.hasAlternatingPattern(deltaXRots) || AimUtils.hasAlternatingPattern(deltaYRots);
 
-        if (hasAlternatingPattern && validSize) {
-            buffer++;
-        } else {
-            buffer = Math.max(0, buffer - 0.02f);
-        }
-        if (buffer > 2) {
-            flagAndAlert();
-            buffer = 1;
+        if (validSize) {
+            boolean hasAlternatingPattern = AimUtils.hasAlternatingPattern(deltaXRots) || AimUtils.hasAlternatingPattern(deltaYRots);
+
+            if (hasAlternatingPattern) {
+                buffer++;
+            } else {
+                buffer = Math.max(0, buffer - 0.02f);
+            }
+            if (buffer > 2) {
+                flagAndAlert();
+                buffer = 1;
+            }
         }
 
         if (deltaXRots.size() > 15) deltaXRots.remove(0);

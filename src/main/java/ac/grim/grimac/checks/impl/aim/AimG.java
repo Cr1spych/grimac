@@ -33,10 +33,12 @@ public class AimG extends Check implements RotationCheck {
         deltaYRots.add(deltaYRot);
 
         boolean validSize = deltaXRots.size() >= 12 && deltaYRots.size() >= 12;
-        boolean hasRepeatingPattern = AimUtils.hasRepeatingPattern(deltaXRots, 6) || AimUtils.hasRepeatingPattern(deltaYRots, 6);
 
-        if (hasRepeatingPattern && validSize) {
-            flagAndAlert();
+        if (validSize) {
+            boolean hasRepeatingPattern = AimUtils.hasRepeatingPattern(deltaXRots, 6) || AimUtils.hasRepeatingPattern(deltaYRots, 6);
+            if (hasRepeatingPattern) {
+                flagAndAlert();
+            }
         }
 
         if (deltaXRots.size() > 12) deltaXRots.remove(0);
