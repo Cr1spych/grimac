@@ -15,7 +15,7 @@ import java.util.List;
 
 import static ac.grim.grimac.events.packets.patch.ResyncWorldUtil.resyncPosition;
 
-@CheckData(name = "MultiActionsF", description = "Interacting with a block and an entity in the same tick")
+@CheckData(name = "MultiActionsC", description = "Interacting with a block and an entity in the same tick")
 public class MultiActionsC extends BlockPlaceCheck {
     public MultiActionsC(GrimPlayer player) {
         super(player);

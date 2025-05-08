@@ -36,6 +36,7 @@ public class AutoclickerA extends Check implements PacketCheck {
                     }
 
                     if (buffer > 3) {
+                        flagAndAlert();
                         buffer = 2;
                     }
 

@@ -11,7 +11,7 @@ import com.github.retrooper.packetevents.protocol.player.DiggingAction;
 import com.github.retrooper.packetevents.protocol.player.InteractionHand;
 import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientPlayerDigging;
 
-@CheckData(name = "MultiActionsE", description = "Swinging while using an item")
+@CheckData(name = "MultiActionsD", description = "Swinging while using an item")
 public class MultiActionsD extends Check implements PacketCheck {
     public MultiActionsD(GrimPlayer player) {
         super(player);

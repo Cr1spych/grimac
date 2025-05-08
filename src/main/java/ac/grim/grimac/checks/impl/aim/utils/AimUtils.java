@@ -1,5 +1,6 @@
 package ac.grim.grimac.checks.impl.aim.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 // GPT MONSTER CODE WWW YOOOO
@@ -118,4 +119,32 @@ public class AimUtils {
         return true;
     }
 
+    public static List<Float> getAcceleration(List<Float> list) {
+        List<Float> acceleration = new ArrayList<>();
+        if (list.size() < 3) return acceleration;
+
+        for (int i = 2; i < list.size(); i++) {
+            float prev = list.get(i - 2);
+            float mid = list.get(i - 1);
+            float curr = list.get(i);
+
+            float accel = (curr - mid) - (mid - prev);
+            acceleration.add(accel);
+        }
+
+        return acceleration;
+    }
+
+    public static void computeAcceleration(List<Float> list, java.util.function.Consumer<Float> consumer) {
+        if (list.size() < 3) return;
+
+        for (int i = 2; i < list.size(); i++) {
+            float prev = list.get(i - 2);
+            float mid = list.get(i - 1);
+            float curr = list.get(i);
+
+            float accel = (curr - mid) - (mid - prev);
+            consumer.accept(accel);
+        }
+    }
 }
