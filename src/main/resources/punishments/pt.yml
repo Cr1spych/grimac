@@ -1,99 +1,155 @@
-# %check_name% - nome da verificação
-# %description% - descrição da verificação
-# %vl% - violações
-# %verbose% - informação extra
-# %player% - nome do jogador
-# [alert] - comando especial para alertar
-# [webhook] - comando especial para alertar com a webhook do discord
-# [proxy] - comando especial para notificar os outros servidores conectados no mesmo proxy (BungeeCord/Velocity)
 Punishments:
-  Simulation:
-    # Depois de quantos segundos a violação deve expirar?
-    remove-violations-after: 300
-    # Essa sessão combina todas as verificações com os nomes listados abaixo.
-    # Para excluir uma verificação que estaria combinada, adicione uma exclamação na frente do nome.
-    # Por exemplo: - "!BadPacketsN"
-    checks:
-      - "Simulation"
-      - "GroundSpoof"
-      - "Timer"
-      - "NoFall"
-    # Limiar: Intervalo entre comandos
-    #
-    # Exemplo, para expulsar um jogador com a mensagem: "movimento incorreto!" depois de 100 violações, sem
-    # repetir o comando:
-    # - "100:0 kick %player% movimento incorreto!"
-    # 0 significa executar somente uma vez.
-    # - "100:50 say %player% está trapaceando!"
-    # Executa quando o jogador alcança 100 violações e depois disso a cada 50 violações após as 100.
-    #
-    commands:
-      - "100:40 [alert]"
-      - "100:100 [webhook]"
-      - "100:100 [proxy]"
-  Knockback:
-    remove-violations-after: 300
-    checks:
-      - "Knockback"
-      - "Explosion"
-    commands:
-      - "5:5 [alert]"
-      - "20:20 [webhook]"
-      - "20:20 [proxy]"
-  Post:
-    remove-violations-after: 300
-    checks:
-      - "Post"
-    commands:
-      - "20:20 [alert]"
-      - "40:40 [webhook]"
-      - "40:40 [proxy]"
-  BadPackets:
-    remove-violations-after: 300
-    checks:
-      - "BadPackets"
-      - "Crash"
-    commands:
-      - "20:20 [alert]"
-      - "40:40 [webhook]"
-      - "40:40 [proxy]"
-  Reach:
-    remove-violations-after: 300
-    checks:
-      - "Reach"
-      - "Hitboxes"
-    commands:
-      - "5:5 [alert]"
-      - "5:5 [webhook]"
-      - "5:5 [proxy]"
-  Misc:
-    remove-violations-after: 300
-    checks:
-      - "Vehicle"
-      - "NoSlow"
-      - "Sprint"
-      - "MultiActions"
-      - "Place"
-      - "Baritone"
-      - "Break"
-      - "TransactionOrder"
-      - "Elytra"
-    commands:
-      - "10:5 [alert]"
-      - "20:10 [webhook]"
-      - "20:10 [proxy]"
-  Combat:
-    remove-violations-after: 300
-    checks:
-      - "Interact"
-      - "Killaura"
-      - "Aim"
-    commands:
-      - "20:40 [alert]"
-  # Dês da 2.2.10, não temos verificações de AutoClicker, isso é somente um placeholder. Grim vai verificar por AutoClicker no futuro.
-  Autoclicker:
-    remove-violations-after: 300
-    checks:
-      - "Autoclicker"
-    commands:
-      - "20:40 [alert]"
+    Simulation:
+        remove-violations-after: 120
+        checks:
+            - "Simulation"
+        commands:
+            - "15:15 [alert]"
+            - "60:60 kick %player% &cGrim &7» &bSimulation"
+    GroundSpoof:
+        remove-violations-after: 120
+        checks:
+            - "GroundSpoof"
+        commands:
+            - "10:10 [alert]"
+            - "30:30 kick %player% &cGrim &7» &bGroundSpoof"
+    Knockback:
+        remove-violations-after: 300
+        checks:
+            - "Knockback"
+        commands:
+            - "5:5 [alert]"
+            - "10:10 kick %player% &cGrim &7» &bVelocity"
+    Explosion:
+        remove-violations-after: 120
+        checks:
+            - "Explosion"
+        commands:
+            - "5:5 [alert]"
+            - "10:10 kick %player% &cGrim &7» &bExplosion"
+    NoSlow:
+        remove-violations-after: 300
+        checks:
+            - "NoSlow"
+        commands:
+            - "1:1 [alert]"
+            - "5:5 kick %player% &cGrim &7» &bNoSlow"
+    Post:
+        remove-violations-after: 120
+        checks:
+            - "Post"
+        commands:
+            - "5:5 [alert]"
+            - "30:30 kick %player% &cGrim &7» &bPost"
+    Sprint:
+        remove-violations-after: 120
+        checks:
+            - "Sprint"
+        commands:
+            - "1:1 [alert]"
+            - "15:15 kick %player% &cGrim &7» &bSprint"
+    Elytra:
+        remove-violations-after: 120
+        checks:
+            - "Elytra"
+        commands:
+            - "5:5 [alert]"
+            - "15:15 kick %player% &cGrim &7» &bElytra"
+    BadPackets:
+        remove-violations-after: 120
+        checks:
+            - "BadPackets"
+        commands:
+            - "10:10 [alert]"
+            - "500:500 kick %player% &cGrim &7» &bBadPackets"
+    Crash:
+        remove-violations-after: 120
+        checks:
+            - "Crash"
+        commands:
+            - "5:5 [alert]"
+            - "30:30 kick %player% &cGrim &7» &bCrash"
+    Place:
+        remove-violations-after: 120
+        checks:
+            - "Place"
+        commands:
+            - "5:5 [alert]"
+            - "15:15 kick %player% &cGrim &7» &bPlace"
+    EntityControl:
+        remove-violations-after: 120
+        checks:
+            - "EntityControl"
+        commands:
+            - "5:5 [alert]"
+            - "15:15 kick %player% &cGrim &7» &bEntityControl"
+    Baritone:
+        remove-violations-after: 900
+        checks:
+            - "Baritone"
+        commands:
+            - "5:5 [alert]"
+            - "15:15 kick %player% &cGrim &7» &bBaritone"
+    FastBreak:
+        remove-violations-after: 300
+        checks:
+            - "FastBreak"
+        commands:
+            - "5:5 [alert]"
+            - "15:15 kick %player% &cGrim &7» &bFastBreak"
+    TransactionOrder:
+        remove-violations-after: 300
+        checks:
+            - "TransactionOrder"
+        commands:
+            - "5:5 [alert]"
+            - "15:15 kick %player% &cGrim &7» &bTransactionOrder"
+    MultiActions:
+        remove-violations-after: 120
+        checks:
+            - "MultiActions"
+        commands:
+            - "1:1 [alert]"
+            - "15:15 kick %player% &cGrim &7» &bMultiActions"
+    Aim:
+        remove-violations-after: 1200
+        checks:
+            - "Aim"
+        commands:
+            - "1:1 [alert]"
+            - "50:50 kick %player% &cGrim &7» &bAim"
+    Reach:
+        remove-violations-after: 900
+        checks:
+            - "Reach"
+        commands:
+            - "1:1 [alert]"
+            - "2:2 kick %player% &cGrim &7» &bReach"
+    Timer:
+        remove-violations-after: 900
+        checks:
+            - "Timer"
+        commands:
+            - "5:5 [alert]"
+            - "10:10 kick %player% &cGrim &7» &bTimer"
+    NoFall:
+        remove-violations-after: 600
+        checks:
+            - "NoFall"
+        commands:
+            - "5:5 [alert]"
+            - "10:10 kick %player% &cGrim &7» &bNoFall"
+    Autoclicker:
+        remove-violations-after: 600
+        checks:
+            - "Autoclicker"
+        commands:
+            - "1:1 [alert]"
+            - "10:10 kick %player% &cGrim &7» &bAutoclicker"
+    Inventory:
+        remove-violations-after: 600
+        checks:
+            - "Inventory"
+        commands:
+            - "1:1 [alert]"
+            - "10:10 kick %player% &cGrim &7» &bInventory"

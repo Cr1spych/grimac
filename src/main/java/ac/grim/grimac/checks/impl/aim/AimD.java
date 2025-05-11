@@ -1,5 +1,6 @@
 package ac.grim.grimac.checks.impl.aim;
 
+import ac.grim.grimac.api.config.ConfigManager;
 import ac.grim.grimac.checks.Check;
 import ac.grim.grimac.checks.CheckData;
 import ac.grim.grimac.checks.impl.aim.utils.AimUtils;
@@ -20,7 +21,7 @@ public class AimD extends Check implements RotationCheck {
         super(player);
     }
 
-    private float buffer;
+    private double buffer, maxBuffer;
 
     @Override
     public void process(RotationUpdate rotationUpdate) {
@@ -33,7 +34,7 @@ public class AimD extends Check implements RotationCheck {
         deltaXRots.add(deltaXRot);
         deltaYRots.add(deltaYRot);
 
-        boolean validSize = deltaXRots.size() >= 15 && deltaYRots.size() >= 15;
+        boolean validSize = deltaXRots.size() >= 25 && deltaYRots.size() >= 25;
 
         if (validSize) {
             boolean hasAlternatingPattern = AimUtils.hasAlternatingPattern(deltaXRots) || AimUtils.hasAlternatingPattern(deltaYRots);
@@ -43,13 +44,18 @@ public class AimD extends Check implements RotationCheck {
             } else {
                 buffer = Math.max(0, buffer - 0.02f);
             }
-            if (buffer > 2) {
+            if (buffer > maxBuffer) {
                 flagAndAlert();
                 buffer = 1;
             }
         }
 
-        if (deltaXRots.size() > 15) deltaXRots.remove(0);
-        if (deltaYRots.size() > 15) deltaYRots.remove(0);
+        if (deltaXRots.size() > 25) deltaXRots.remove(0);
+        if (deltaYRots.size() > 25) deltaYRots.remove(0);
+    }
+
+    @Override
+    public void onReload(ConfigManager configManager) {
+        this.maxBuffer = configManager.getDoubleElse("AimD.buffer", 2.0);
     }
 }

@@ -1,5 +1,6 @@
 package ac.grim.grimac.checks.impl.aim;
 
+import ac.grim.grimac.api.config.ConfigManager;
 import ac.grim.grimac.checks.Check;
 import ac.grim.grimac.checks.CheckData;
 import ac.grim.grimac.checks.type.RotationCheck;
@@ -12,13 +13,15 @@ public class AimB extends Check implements RotationCheck {
         super(player);
     }
 
-    private float buffer, lastDeltaXRot, lastDeltaYRot, repeats;
+    private double buffer, maxBuffer;
+    private float repeats;
+    private float lastDeltaXRot, lastDeltaYRot;
 
     @Override
     public void process(RotationUpdate rotationUpdate) {
         float deltaXRot = rotationUpdate.getDeltaXRotABS();
         float deltaYRot = rotationUpdate.getDeltaYRotABS();
-        if (deltaYRot < 0.35 || deltaXRot < 0.35 || rotationUpdate.isCinematic() || player.inVehicle()) {
+        if (deltaYRot < 0.35 || deltaXRot < 0.35 || rotationUpdate.isCinematic() || player.inVehicle() || player.getVerticalSensitivity() > 0.70 || player.getHorizontalSensitivity() > 0.70) {
             return;
         }
 
@@ -31,7 +34,7 @@ public class AimB extends Check implements RotationCheck {
             repeats = 0;
         }
         if (repeats > 3) {
-            if (++buffer > 8) {
+            if (++buffer > maxBuffer) {
                 flagAndAlert();
                 buffer = 7;
             } else {
@@ -41,5 +44,10 @@ public class AimB extends Check implements RotationCheck {
 
         lastDeltaXRot = deltaXRot;
         lastDeltaYRot = deltaYRot;
+    }
+
+    @Override
+    public void onReload(ConfigManager configManager) {
+        this.maxBuffer = configManager.getDoubleElse("AimB.buffer", 8.0);
     }
 }

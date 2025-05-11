@@ -10,6 +10,7 @@ import ac.grim.grimac.checks.Check;
 import ac.grim.grimac.checks.impl.aim.processor.AimProcessor;
 import ac.grim.grimac.checks.impl.misc.ClientBrand;
 import ac.grim.grimac.checks.impl.misc.TransactionOrder;
+import ac.grim.grimac.checks.impl.packetorder.PacketOrderProcessor;
 import ac.grim.grimac.events.packets.CheckManagerListener;
 import ac.grim.grimac.manager.*;
 import ac.grim.grimac.manager.player.features.FeatureManagerImpl;
@@ -96,6 +97,7 @@ public class GrimPlayer implements GrimUser {
     public final Queue<Pair<Short, Long>> transactionsSent = new ConcurrentLinkedQueue<>();
     public final Set<Short> didWeSendThatTrans = ConcurrentHashMap.newKeySet();
     private final AtomicInteger transactionIDCounter = new AtomicInteger(0);
+    public final PacketOrderProcessor packetOrderProcessor = new PacketOrderProcessor(this);
     public AtomicInteger lastTransactionSent = new AtomicInteger(0);
     public AtomicInteger lastTransactionReceived = new AtomicInteger(0);
     // End transaction handling stuff
@@ -104,6 +106,7 @@ public class GrimPlayer implements GrimUser {
     public ActionManager actionManager;
     public PunishmentManager punishmentManager;
     public MovementCheckRunner movementCheckRunner;
+    public RotationData rotationData;
     public SyncedTags tagManager;
     // End manager like classes
     public Vector clientVelocity = new Vector();

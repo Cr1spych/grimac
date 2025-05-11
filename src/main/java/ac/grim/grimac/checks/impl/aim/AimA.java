@@ -1,5 +1,6 @@
 package ac.grim.grimac.checks.impl.aim;
 
+import ac.grim.grimac.api.config.ConfigManager;
 import ac.grim.grimac.checks.Check;
 import ac.grim.grimac.checks.CheckData;
 import ac.grim.grimac.checks.type.RotationCheck;
@@ -9,17 +10,19 @@ import ac.grim.grimac.utils.anticheat.update.RotationUpdate;
 @CheckData(name = "AimA")
 public class AimA extends Check implements RotationCheck {
 
+    private double buffer, maxBuffer;
+
+    private float lastDeltaXRot, lastDeltaYRot, xRotExceeding, yRotExceeding;
+
     public AimA(GrimPlayer player) {
         super(player);
     }
-
-    private float lastDeltaXRot, lastDeltaYRot, xRotExceeding, yRotExceeding;
-    private float buffer;
 
     @Override
     public void process(RotationUpdate rotationUpdate) {
         float deltaXRot = rotationUpdate.getDeltaXRotABS();
         float deltaYRot = rotationUpdate.getDeltaYRotABS();
+
         if (rotationUpdate.isCinematic() || player.inVehicle()) {
             return;
         }
@@ -29,17 +32,23 @@ public class AimA extends Check implements RotationCheck {
 
         boolean hasExceeding = xRotExceeding > 2 || yRotExceeding > 2;
 
-        if (((deltaXRot > 50 && lastDeltaXRot < 3.5) || (deltaYRot > 45 && lastDeltaYRot < 3.5)) && !hasExceeding && player.actionManager.hasAttackedSince(80)) {
+        if (((deltaXRot > 50 && lastDeltaXRot < 4.7) || (deltaYRot > 45 && lastDeltaYRot < 4.7)) && !hasExceeding && player.actionManager.hasAttackedSince(80)) {
             buffer++;
         } else {
             buffer = Math.max(0, buffer - 0.04f);
         }
-        if (buffer > 1) {
+
+        if (buffer > maxBuffer) {
             flagAndAlert();
-            buffer = 0.5f;
+            buffer = 0;
         }
 
         lastDeltaXRot = deltaXRot;
         lastDeltaYRot = deltaYRot;
+    }
+
+    @Override
+    public void onReload(ConfigManager configManager) {
+        this.maxBuffer = configManager.getDoubleElse("AimA.buffer", 1.0);
     }
 }

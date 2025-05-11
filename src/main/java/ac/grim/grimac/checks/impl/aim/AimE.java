@@ -1,5 +1,6 @@
 package ac.grim.grimac.checks.impl.aim;
 
+import ac.grim.grimac.api.config.ConfigManager;
 import ac.grim.grimac.checks.Check;
 import ac.grim.grimac.checks.CheckData;
 import ac.grim.grimac.checks.type.RotationCheck;
@@ -13,7 +14,7 @@ public class AimE extends Check implements RotationCheck {
         super(player);
     }
 
-    private float buffer;
+    private double buffer, maxBuffer;
 
     @Override
     public void process(RotationUpdate rotationUpdate) {
@@ -28,9 +29,14 @@ public class AimE extends Check implements RotationCheck {
         } else {
             buffer = Math.max(0, buffer - 0.05f);
         }
-        if (buffer > 2) {
+        if (buffer > maxBuffer) {
             flagAndAlert();
             buffer = 1;
         }
+    }
+
+    @Override
+    public void onReload(ConfigManager configManager) {
+        this.maxBuffer = configManager.getDoubleElse("AimE.buffer", 2.0);
     }
 }

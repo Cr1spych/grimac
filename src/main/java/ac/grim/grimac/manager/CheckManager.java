@@ -20,11 +20,16 @@ import ac.grim.grimac.checks.impl.exploit.ExploitC;
 import ac.grim.grimac.checks.impl.groundspoof.NoFall;
 import ac.grim.grimac.checks.impl.inventory.InventoryA;
 import ac.grim.grimac.checks.impl.inventory.InventoryB;
+import ac.grim.grimac.checks.impl.killaura.KillauraA;
+import ac.grim.grimac.checks.impl.killaura.KillauraB;
+import ac.grim.grimac.checks.impl.killaura.KillauraC;
+import ac.grim.grimac.checks.impl.killaura.KillauraD;
 import ac.grim.grimac.checks.impl.misc.ClientBrand;
 import ac.grim.grimac.checks.impl.misc.GhostBlockMitigation;
 import ac.grim.grimac.checks.impl.misc.TransactionOrder;
 import ac.grim.grimac.checks.impl.movement.*;
 import ac.grim.grimac.checks.impl.multiactions.*;
+import ac.grim.grimac.checks.impl.packetorder.PacketOrderProcessor;
 import ac.grim.grimac.checks.impl.post.Post;
 import ac.grim.grimac.checks.impl.prediction.DebugHandler;
 import ac.grim.grimac.checks.impl.prediction.GroundSpoof;
@@ -52,6 +57,7 @@ import ac.grim.grimac.player.GrimPlayer;
 import ac.grim.grimac.predictionengine.GhostBlockDetector;
 import ac.grim.grimac.predictionengine.SneakingEstimator;
 import ac.grim.grimac.utils.anticheat.update.*;
+import ac.grim.grimac.utils.data.RotationData;
 import ac.grim.grimac.utils.latency.CompensatedCooldown;
 import ac.grim.grimac.utils.latency.CompensatedFireworks;
 import ac.grim.grimac.utils.latency.CompensatedInventory;
@@ -85,7 +91,9 @@ public class CheckManager {
         // Include post checks in the packet check too
         packetChecks = new ImmutableClassToInstanceMap.Builder<PacketCheck>()
                 .put(Hitboxes.class, new Hitboxes(player))
+                .put(KillauraD.class, new KillauraD(player))
                 .put(AutoclickerA.class, new AutoclickerA(player))
+                .put(KillauraA.class, new KillauraA(player))
                 .put(Reach.class, new Reach(player))
                 .put(PacketEntityReplication.class, new PacketEntityReplication(player))
                 .put(PacketChangeGameState.class, new PacketChangeGameState(player))
@@ -117,14 +125,15 @@ public class CheckManager {
                 .put(BadPacketsU.class, new BadPacketsU(player))
                 .put(BadPacketsV.class, new BadPacketsV(player))
                 .put(BadPacketsW.class, new BadPacketsW(player))
-                .put(BadPacketsY.class, new BadPacketsY(player))
+                .put(BadPacketsX.class, new BadPacketsX(player))
                 .put(InventoryA.class, new InventoryA(player))
                 .put(InventoryB.class, new InventoryB(player))
-                .put(MultiActionsA.class, new MultiActionsA(player))
+                .put(KillauraC.class, new KillauraC(player))
                 .put(MultiActionsB.class, new MultiActionsB(player))
                 .put(MultiActionsC.class, new MultiActionsC(player))
-                .put(MultiActionsD.class, new MultiActionsD(player))
+                .put(MultiActionsA.class, new MultiActionsA(player))
                 .put(TransactionOrder.class, new TransactionOrder(player))
+                .put(PacketOrderProcessor.class, player.packetOrderProcessor)
                 .put(SprintA.class, new SprintA(player))
                 .put(VehicleA.class, new VehicleA(player))
                 .put(VehicleB.class, new VehicleB(player))
@@ -144,8 +153,8 @@ public class CheckManager {
                 .put(AimE.class, new AimE(player))
                 .put(AimF.class, new AimF(player))
                 .put(AimG.class, new AimG(player))
-                .put(AimH.class, new AimH(player))
                 .put(AimProcessor.class, new AimProcessor(player))
+                .put(RotationData.class, new RotationData(player))
                 .put(AimModulo360.class, new AimModulo360(player))
                 .put(AimDuplicateLook.class, new AimDuplicateLook(player))
 //                .put(Baritone.class, new Baritone(player))
@@ -165,7 +174,7 @@ public class CheckManager {
                 .put(OffsetHandler.class, new OffsetHandler(player))
                 .put(SuperDebug.class, new SuperDebug(player))
                 .put(DebugHandler.class, new DebugHandler(player))
-                .put(BadPacketsX.class, new BadPacketsX(player))
+                .put(KillauraB.class, new KillauraB(player))
                 .put(NoSlow.class, new NoSlow(player))
                 .put(SprintB.class, new SprintB(player))
                 .put(SprintC.class, new SprintC(player))
