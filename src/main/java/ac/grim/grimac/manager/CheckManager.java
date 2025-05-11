@@ -23,7 +23,6 @@ import ac.grim.grimac.checks.impl.inventory.InventoryB;
 import ac.grim.grimac.checks.impl.killaura.KillauraA;
 import ac.grim.grimac.checks.impl.killaura.KillauraB;
 import ac.grim.grimac.checks.impl.killaura.KillauraC;
-import ac.grim.grimac.checks.impl.killaura.KillauraD;
 import ac.grim.grimac.checks.impl.misc.ClientBrand;
 import ac.grim.grimac.checks.impl.misc.GhostBlockMitigation;
 import ac.grim.grimac.checks.impl.misc.TransactionOrder;
