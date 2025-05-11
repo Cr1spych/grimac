@@ -3,6 +3,7 @@ package ac.grim.grimac.utils.packet;
 import com.github.retrooper.packetevents.event.PacketReceiveEvent;
 import com.github.retrooper.packetevents.protocol.packettype.PacketType;
 import com.github.retrooper.packetevents.protocol.player.DiggingAction;
+import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientEntityAction;
 import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientInteractEntity;
 import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientPlayerDigging;
 
@@ -68,5 +69,37 @@ public final class Packet {
 
     public static boolean isBlockPlace(PacketReceiveEvent event) {
         return event.getPacketType() == PacketType.Play.Client.PLAYER_BLOCK_PLACEMENT;
+    }
+
+    public static boolean isStartSprinting(PacketReceiveEvent event) {
+        if (event.getPacketType() == PacketType.Play.Client.ENTITY_ACTION) {
+            WrapperPlayClientEntityAction packet = new WrapperPlayClientEntityAction(event);
+            return packet.getAction() == WrapperPlayClientEntityAction.Action.START_SPRINTING;
+        }
+        return false;
+    }
+
+    public static boolean isStopSprinting(PacketReceiveEvent event) {
+        if (event.getPacketType() == PacketType.Play.Client.ENTITY_ACTION) {
+            WrapperPlayClientEntityAction packet = new WrapperPlayClientEntityAction(event);
+            return packet.getAction() == WrapperPlayClientEntityAction.Action.STOP_SPRINTING;
+        }
+        return false;
+    }
+
+    public static boolean isStartSneaking(PacketReceiveEvent event) {
+        if (event.getPacketType() == PacketType.Play.Client.ENTITY_ACTION) {
+            WrapperPlayClientEntityAction packet = new WrapperPlayClientEntityAction(event);
+            return packet.getAction() == WrapperPlayClientEntityAction.Action.START_SNEAKING;
+        }
+        return false;
+    }
+
+    public static boolean isStopSneaking(PacketReceiveEvent event) {
+        if (event.getPacketType() == PacketType.Play.Client.ENTITY_ACTION) {
+            WrapperPlayClientEntityAction packet = new WrapperPlayClientEntityAction(event);
+            return packet.getAction() == WrapperPlayClientEntityAction.Action.STOP_SNEAKING;
+        }
+        return false;
     }
 }

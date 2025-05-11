@@ -124,7 +124,7 @@ public class CheckManager {
                 .put(BadPacketsU.class, new BadPacketsU(player))
                 .put(BadPacketsV.class, new BadPacketsV(player))
                 .put(BadPacketsW.class, new BadPacketsW(player))
-                .put(BadPacketsX.class, new BadPacketsX(player))
+                .put(BadPacketsH.class, new BadPacketsH(player))
                 .put(InventoryA.class, new InventoryA(player))
                 .put(InventoryB.class, new InventoryB(player))
                 .put(KillauraC.class, new KillauraC(player))
