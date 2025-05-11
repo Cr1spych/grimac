@@ -5,8 +5,8 @@ import ac.grim.grimac.checks.Check;
 import ac.grim.grimac.checks.CheckData;
 import ac.grim.grimac.checks.type.PacketCheck;
 import ac.grim.grimac.player.GrimPlayer;
+import ac.grim.grimac.utils.packet.Packet;
 import com.github.retrooper.packetevents.event.PacketReceiveEvent;
-import com.github.retrooper.packetevents.protocol.packettype.PacketType;
 
 @CheckData(name = "InventoryB")
 public class InventoryB extends Check implements PacketCheck {
@@ -18,10 +18,12 @@ public class InventoryB extends Check implements PacketCheck {
 
     @Override
     public void onPacketReceive(PacketReceiveEvent event) {
-        if (event.getPacketType() == PacketType.Play.Client.CLICK_WINDOW) {
-            if (player.isSprinting || player.isSwimming) {
+        if (Packet.isClickWindow(event)) {
+            if (player.isSprinting) {
                 flagAndAlert();
-                if (cancelClicks) event.setCancelled(true);
+                if (cancelClicks) {
+                    event.setCancelled(true);
+                }
             }
         }
     }

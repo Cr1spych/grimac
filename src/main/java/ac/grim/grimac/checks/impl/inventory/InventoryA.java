@@ -29,13 +29,9 @@ public class InventoryA extends Check implements PacketCheck {
             hasInventoryOpen = true;
         }
 
-        if (event.getPacketType() == PacketType.Play.Client.INTERACT_ENTITY) {
-            WrapperPlayClientInteractEntity packet = new WrapperPlayClientInteractEntity(event);
-            if (packet.getAction() == WrapperPlayClientInteractEntity.InteractAction.ATTACK) {
-                if (hasInventoryOpen) {
-                    flagAndAlert();
-                    if (cancelHits) event.setCancelled(true);
-                }
+        if (Packet.isAttack(event) && hasInventoryOpen) {
+            if (cancelHits) {
+                event.setCancelled(true);
             }
         }
     }
