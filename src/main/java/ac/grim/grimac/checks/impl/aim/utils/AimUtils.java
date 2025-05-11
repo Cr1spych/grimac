@@ -118,17 +118,4 @@ public class AimUtils {
         }
         return true;
     }
-
-    public static void computeAcceleration(List<Float> list, java.util.function.Consumer<Float> consumer) {
-        if (list.size() < 3) return;
-
-        for (int i = 2; i < list.size(); i++) {
-            float prev = list.get(i - 2);
-            float mid = list.get(i - 1);
-            float curr = list.get(i);
-
-            float accel = (curr - mid) - (mid - prev);
-            consumer.accept(accel);
-        }
-    }
 }
