@@ -112,12 +112,12 @@ Punishments:
             - "1:1 [alert]"
             - "15:15 kick %player% &cGrim &7» &bMultiActions"
     Aim:
-        remove-violations-after: 1200
+        remove-violations-after: 600
         checks:
             - "Aim"
         commands:
             - "1:1 [alert]"
-            - "50:50 kick %player% &cGrim &7» &bAim"
+            - "40:40 kick %player% &cGrim &7» &bAim"
     Reach:
         remove-violations-after: 900
         checks:
@@ -145,11 +145,18 @@ Punishments:
             - "Autoclicker"
         commands:
             - "1:1 [alert]"
-            - "10:10 kick %player% &cGrim &7» &bAutoclicker"
+            - "30:30 kick %player% &cGrim &7» &bAutoclicker"
     Inventory:
         remove-violations-after: 600
         checks:
             - "Inventory"
         commands:
             - "1:1 [alert]"
-            - "10:10 kick %player% &cGrim &7» &bInventory"
+            - "20:20 kick %player% &cGrim &7» &bInventory"
+    Killaura:
+        remove-violations-after: 600
+        checks:
+            - "Killaura"
+        commands:
+            - "1:1 [alert]"
+            - "35:35 kick %player% &cGrim &7» &bKillaura"

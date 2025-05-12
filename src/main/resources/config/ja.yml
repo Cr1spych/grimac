@@ -11,9 +11,6 @@
 AimA:
     buffer: 2.0
 
-AimB:
-    buffer: 8.0
-
 AimC:
     buffer: 2.0
 
@@ -43,6 +40,9 @@ InventoryA:
 
 InventoryB:
     cancelClicks: true
+
+InventoryC:
+    buffer: 2.0
 
 
 alerts:
