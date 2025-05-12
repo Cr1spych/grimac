@@ -1,6 +1,7 @@
 package ac.grim.grimac.manager;
 
 import ac.grim.grimac.api.AbstractCheck;
+import ac.grim.grimac.checks.impl.MultiCheckTest;
 import ac.grim.grimac.checks.impl.aim.*;
 import ac.grim.grimac.checks.impl.aim.grim.AimDuplicateLook;
 import ac.grim.grimac.checks.impl.aim.grim.AimModulo360;
@@ -84,6 +85,7 @@ public class CheckManager {
     ClassToInstanceMap<BlockBreakCheck> blockBreakChecks;
     ClassToInstanceMap<BlockPlaceCheck> blockPlaceCheck;
     ClassToInstanceMap<PostPredictionCheck> postPredictionCheck;
+    ClassToInstanceMap<MultiCheck> multiCheck;
 
     public ClassToInstanceMap<AbstractCheck> allChecks;
 
@@ -144,6 +146,9 @@ public class CheckManager {
         positionCheck = new ImmutableClassToInstanceMap.Builder<PositionCheck>()
                 .put(PredictionRunner.class, new PredictionRunner(player))
                 .put(CompensatedCooldown.class, new CompensatedCooldown(player))
+                .build();
+        multiCheck = new ImmutableClassToInstanceMap.Builder<MultiCheck>()
+                .put(MultiCheckTest.class, new MultiCheckTest(player))
                 .build();
         rotationCheck = new ImmutableClassToInstanceMap.Builder<RotationCheck>()
                 .put(AimA.class, new AimA(player))
