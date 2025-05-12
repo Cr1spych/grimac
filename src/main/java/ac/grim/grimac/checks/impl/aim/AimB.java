@@ -10,7 +10,7 @@ import ac.grim.grimac.utils.anticheat.update.RotationUpdate;
 import java.util.ArrayList;
 import java.util.List;
 
-@CheckData(name = "AimF")
+@CheckData(name = "AimB")
 public class AimB extends Check implements RotationCheck {
 
     private List<Float> deltaXRots = new ArrayList<>();
