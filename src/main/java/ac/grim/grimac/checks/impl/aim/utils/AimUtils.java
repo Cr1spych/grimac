@@ -1,6 +1,5 @@
 package ac.grim.grimac.checks.impl.aim.utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 // GPT MONSTER CODE WWW YOOOO

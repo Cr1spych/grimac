@@ -106,7 +106,6 @@ public class GrimPlayer implements GrimUser {
     public ActionManager actionManager;
     public PunishmentManager punishmentManager;
     public MovementCheckRunner movementCheckRunner;
-    public RotationData rotationData;
     public SyncedTags tagManager;
     // End manager like classes
     public Vector clientVelocity = new Vector();

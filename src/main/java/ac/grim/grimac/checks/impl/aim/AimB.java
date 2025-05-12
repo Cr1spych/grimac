@@ -1,53 +1,45 @@
 package ac.grim.grimac.checks.impl.aim;
 
-import ac.grim.grimac.api.config.ConfigManager;
 import ac.grim.grimac.checks.Check;
 import ac.grim.grimac.checks.CheckData;
+import ac.grim.grimac.checks.impl.aim.utils.millenium.Statistics;
 import ac.grim.grimac.checks.type.RotationCheck;
 import ac.grim.grimac.player.GrimPlayer;
 import ac.grim.grimac.utils.anticheat.update.RotationUpdate;
 
-@CheckData(name = "AimB")
+import java.util.ArrayList;
+import java.util.List;
+
+@CheckData(name = "AimF")
 public class AimB extends Check implements RotationCheck {
+
+    private List<Float> deltaXRots = new ArrayList<>();
+    private List<Float> deltaYRots = new ArrayList<>();
+
     public AimB(GrimPlayer player) {
         super(player);
     }
 
-    private double buffer, maxBuffer;
-    private float repeats;
-    private float lastDeltaXRot, lastDeltaYRot;
+    private float xStDev, yStDev;
 
     @Override
     public void process(RotationUpdate rotationUpdate) {
-        float deltaXRot = rotationUpdate.getDeltaXRotABS();
-        float deltaYRot = rotationUpdate.getDeltaYRotABS();
-        if (deltaYRot < 0.35 || deltaXRot < 0.35 || rotationUpdate.isCinematic() || player.inVehicle() || player.getVerticalSensitivity() > 0.70 || player.getHorizontalSensitivity() > 0.70) {
-            return;
+        float deltaXRot = rotationUpdate.getDeltaXRot();
+        float deltaYRot = rotationUpdate.getDeltaYRot();
+
+        deltaXRots.add(deltaXRot);
+        deltaYRots.add(deltaYRot);
+
+        if (deltaXRots.size() >= 10 && deltaYRots.size() >= 10) {
+            xStDev = (float) Statistics.getStandardDeviation(deltaXRots);
+            yStDev = (float) Statistics.getStandardDeviation(deltaYRots);
         }
 
-        boolean repeatingXRot = lastDeltaXRot == deltaXRot;
-        boolean repeatingYRot = lastDeltaYRot == deltaYRot;
-
-        if (repeatingXRot || repeatingYRot) {
-            repeats++;
-        } else {
-            repeats = 0;
-        }
-        if (repeats > 3) {
-            if (++buffer > maxBuffer) {
-                flagAndAlert();
-                buffer = 7;
-            } else {
-                buffer = Math.max(0, buffer - 0.2f);
-            }
+        if ((xStDev > 3.6f && yStDev <= 0.0f) || (yStDev > 3.6f && xStDev <= 0.0f)) {
+            flagAndAlert();
         }
 
-        lastDeltaXRot = deltaXRot;
-        lastDeltaYRot = deltaYRot;
-    }
-
-    @Override
-    public void onReload(ConfigManager configManager) {
-        this.maxBuffer = configManager.getDoubleElse("AimB.buffer", 8.0);
+        if (deltaXRots.size() > 10) deltaXRots.remove(0);
+        if (deltaYRots.size() > 10) deltaYRots.remove(0);
     }
 }

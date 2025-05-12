@@ -102,4 +102,12 @@ public final class Packet {
         }
         return false;
     }
+
+    public static boolean isFlying(PacketReceiveEvent event) {
+        return event.getPacketType() == PacketType.Play.Client.PLAYER_FLYING;
+    }
+
+    public static boolean isVehicleMove(PacketReceiveEvent event) {
+        return event.getPacketType() == PacketType.Play.Client.VEHICLE_MOVE;
+    }
 }
