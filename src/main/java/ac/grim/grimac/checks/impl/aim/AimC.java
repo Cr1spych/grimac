@@ -37,12 +37,10 @@ public class AimC extends Check implements RotationCheck {
 
         if (deltaXRots.size() >= 50) {
             duplicatedX = AimUtils.hasDuplicates(deltaXRots, 27);
-            deltaXRots.remove(0);
         }
 
         if (deltaYRots.size() >= 50) {
             duplicatedY = AimUtils.hasDuplicates(deltaYRots, 27);
-            deltaYRots.remove(0);
         }
 
         if (duplicatedX || duplicatedY) {
@@ -54,6 +52,13 @@ public class AimC extends Check implements RotationCheck {
         if (buffer > maxBuffer) {
             flagAndAlert();
             buffer = 0;
+        }
+
+        if (deltaXRots.size() > 50) {
+            deltaXRots.remove(0);
+        }
+        if (deltaYRots.size() > 50) {
+            deltaYRots.remove(0);
         }
     }
 

@@ -37,12 +37,10 @@ public class AimD extends Check implements RotationCheck {
 
         if (deltaXRots.size() >= 25) {
             alternatingX = AimUtils.hasAlternatingPattern(deltaXRots);
-            deltaXRots.remove(0);
         }
 
         if (deltaYRots.size() >= 25) {
             alternatingY = AimUtils.hasAlternatingPattern(deltaYRots);
-            deltaYRots.remove(0);
         }
 
         if (alternatingX || alternatingY) {
@@ -53,6 +51,14 @@ public class AimD extends Check implements RotationCheck {
         if (buffer > maxBuffer) {
             flagAndAlert();
             buffer = 0;
+        }
+
+        if (deltaXRots.size() > 50) {
+            deltaXRots.remove(0);
+        }
+
+        if (deltaYRots.size() > 50) {
+            deltaYRots.remove(0);
         }
     }
 

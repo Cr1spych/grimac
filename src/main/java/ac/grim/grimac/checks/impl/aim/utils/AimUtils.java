@@ -2,7 +2,7 @@ package ac.grim.grimac.checks.impl.aim.utils;
 
 import java.util.List;
 
-// GPT MONSTER CODE WWW YOOOO
+// GPT CODE MONSTER WWW YOO
 public class AimUtils {
 
     public static float getAverage(List<Float> list) {

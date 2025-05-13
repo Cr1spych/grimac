@@ -1,15 +1,13 @@
-# GrimAC main configuration
-# Source code: https://github.com/MWHunter/Grim
-# Copyright 2025 DefineOutside and contributors, Licensed under GPLv3.
-# Modified binaries, or plugins with copied grim code, must be private,
-# or with full source code available to buyers at no additional cost.
 
 #-----------------#
 # Aim             #
 #-----------------#
 
 AimA:
-    buffer: 2.0
+    buffer: 1.0
+
+AimB:
+    buffer: 8.0
 
 AimC:
     buffer: 2.0
@@ -17,8 +15,6 @@ AimC:
 AimD:
     buffer: 2.0
 
-AimE:
-    buffer: 2.0
 
 
 #-----------------#
@@ -29,6 +25,7 @@ AutoclickerA:
     buffer: 4.8
     increaseBuffer: 1.6
     decreaseBuffer: 1.1
+
     cancelHits: true
 
 #-----------------#
@@ -44,16 +41,29 @@ InventoryB:
 InventoryC:
     buffer: 2.0
 
+#-----------------#
+# Killaura        #
+#-----------------#
+
+KillauraA:
+    cancelHits: true
+
+KillauraC:
+    cancelHits: true
+    buffer: 1.0
+
+KillauraD:
+    cancelHits: true
 
 alerts:
-    # In addition to broadcasting alerts to players, should they also be sent to the console?
+    # Besides broadcasting alerts to players, should they also be sent to the console?
     print-to-console: true
-    # This controls whether/how alerts are shared between servers connected to your proxy.
-    # You must have 'bungee-plugin-message-channel' enabled in your Velocity's configuration if Velocity is in use.
+    # This controls whether/how alerts are relayed between servers connected to your proxy.
+    # You must have 'bungee-plugin-message-channel' enabled in your Velocity config if using Velocity.
     proxy:
         # Should alerts be sent to other servers connected to your proxy?
         send: false
-        # Should the alerts received from other servers be announced to this server?
+        # Should alerts received from other servers be announced on this server?
         receive: false
 
 verbose:
@@ -62,7 +72,7 @@ verbose:
 check-for-updates: true
 
 client-brand:
-    # This means it won't broadcast their brand to operators if the brand matches the following regexes
+    # Will not broadcast its brand to operators if it matches the following regex patterns
     ignored-clients:
         - "^vanilla$"
         - "^fabric$"
@@ -71,13 +81,13 @@ client-brand:
         - "^labymod$"
 
 spectators:
-    # Hide all spectators with the grim.spectator permission regardless if they are actually actively spectating
+    # Hide all spectators with the grim.spectator permission, regardless of whether they are actively spectating.
     hide-regardless: false
-    # Will make spectators hidden only in these worlds, keep blank to allow all worlds
+    # Will only make spectators invisible in these worlds. Leave empty to allow all worlds.
     allowed-worlds:
         - ""
 
-# How long should players have until we kick them for timing out? Default = 60 seconds
+# How much time players are allowed before they are kicked for transaction timeout? Default = 60 seconds
 max-transaction-time: 60
 
 # Should the duplicate movement packet be cancelled?
@@ -89,31 +99,29 @@ cancel-duplicate-packet: true
 ignore-duplicate-packet-rotation: false
 
 Simulation:
-    # How much should we multiply total advantage by when the player is legit
-    # This is what the default config looks like (x axis = seconds, y axis = 1/1000 block): https://www.desmos.com/calculator/d4ufgxrxer
+    # How much we should multiply the total advantage when the player is legitimate.
     setback-decay-multiplier: 0.999
-    # How large of an offset from the player's movement should we create a violation for?
-    # Measured in blocks from the possible movement
-    # We account for Optifine by switching trig tables but dropping this to 0.001 will reduce FastMath
-    # flagging the anticheat if this compensation doesn't work...
+    # How far from the possible movement the player must be to trigger a violation?
+    # Measured in blocks from possible movement
+    # We account for Optifine by switching trigger tables, but lowering this to 0.001 will reduce FastMath
+    # and will flag if that compensation fails...
     threshold: 0.001
-    # How large of a violation in a tick before the player gets immediately setback?
+    # How large must a tick violation be before an immediate setback is issued?
     # -1 to disable
     immediate-setback-threshold: 0.1
-    # How large of an advantage over all ticks before we start to setback?
+    # How large the total advantage over all ticks must be before starting setbacks?
     # -1 to disable
     max-advantage: 1
-    # After 50 seconds with default config, the player will go from 4 blocks -> 1 block of advantage
-    # This is to stop the player from gathering too many violations and never being able to clear them all
-    # Default advantage ceiling (x axis = seconds, y axis = 1/1000 block): https://www.desmos.com/calculator/4lovswdarj
+    # After 50 seconds (default config), player advantage will decay from 4 blocks -> 1 block.
+    # This prevents players from building up unlimited violations.
     max-ceiling: 4
-    # Violation level threshold for setback
-    # 1 for old behavior
+    # Violation level threshold before setbacks begin
+    # 1 for legacy behavior
     setback-violation-threshold: 1
 
-# Checks to see if a player entered a block during a movement
+# Checks if the player entered a block while moving.
 Phase:
-    setbackvl: 1 # Glitching into blocks can allow wall climbing, plus this check is relatively stable
+    setbackvl: 1 # Block glitches may allow wall climbing; also this check is relatively stable
     decay: 0.005
 
 AirLiquidPlace:
@@ -131,32 +139,29 @@ PositionPlace:
 RotationPlace:
     cancelvl: 5
 
-# Prediction-based no slow check
-# Grim accounts for buggy netcode here... hard to false even when spamming right click and offhand button
-# Much more stable than other anticheats, but please report any falses... I have fixed a ton of netcode issues here.
+# NoSlow check based on predictions
+# Grim accounts for netcode bugs here... hard to fail even when spam-clicking with right-click or offhand.
+# Much more stable than other anticheats, but please report any false positives.
 NoSlow:
-    # How much of an offset is "cheating"
-    # By default this is lower than other offs
-    # Flags by 0.03-0.2 consistently with NoSlow on
+    # How large of a shift counts as cheating.
+    # Default is lower than other offsets
+    # Flags at 0.03-0.2 reliably when NoSlow is on
     threshold: 0.001
-    # Setback fast on the first item to remove any advantage NoSlow gives
+    # Immediate setback at first flag to remove NoSlow advantage
     setbackvl: 5
-    # Decay's when the player uses an item AND is slowed by it
+    # Decay occurs when the player uses an item AND is slowed by it
     decay: 0.05
 
 Knockback:
-    # How much should we multiply total advantage by when the player is legit
+    # How much we should multiply the total advantage when the player is legitimate.
     setback-decay-multiplier: 0.999
-    # How large of an offset from the player's velocity should we create a violation for?
-    # Measured in blocks from the possible velocity
+    # How far from the possible movement the player must be to trigger a violation?
     threshold: 0.001
-    # How large of a violation in a tick before the player gets immediately setback?
-    # -1 to disable
+    # How large must a tick violation be before an immediate setback is issued?
     immediate-setback-threshold: 0.1
-    # How large of an advantage over all ticks before we start to setback?
-    # -1 to disable
+    # How large the total advantage over all ticks must be before starting setbacks?
     max-advantage: 1
-    # This is to stop the player from gathering too many violations and never being able to clear them all
+    # Prevents player from accumulating too much violation and never clearing it
     max-ceiling: 4
 
 Explosion:
@@ -165,75 +170,70 @@ Explosion:
 
 TimerA:
     setbackvl: 10
-    # Milliseconds that the player can accumulate for later use when they fall behind
-    # Could potentially allow 1.8 fast use/fast heal/fast bow bypasses if set too high, 120 ms seems like a good balance
+    # Milliseconds the player can accumulate to use later when lagging behind.
+    # Could allow 1.8 bypasses: fast-use/heal/bow if set too high; 120 ms is a good balance
     drift: 120
-    # Ping at which the check will start to limit timer balance, to prevent abuse.
-    # Can cause some setbacks for legitimate players but only if they are over this ping threshold.
+    # Ping at which the check will start limiting timer balance to prevent abuse.
+    # May cause setbacks for legit players but only if over this ping threshold.
     # -1 to disable
     ping-abuse-limit-threshold: 1000
 
 NegativeTimer:
-    # Number of milliseconds lost while moving before we should start flagging
+    # Milliseconds lost during movement before flagging
     drift: 1200
 
-# Same check method as TimerA, but for vehicles
+# Same check as TimerA but for vehicles
 TimerVehicle:
     # Target 1.005 timer
     setbackvl: 10
 
 Reach:
-    # How much should we expand hitboxes by? 0.0005 should detect 3.0005+ reach
+    # How much to expand hitboxes? 0.0005 should detect 3.0005+ extra reach
     #
-    # There is 0.03 forced expansion with 1.9-1.18.1 (not 1.18.2), or some client/server combinations due to
-    # protocol changes and limitations. This check is most powerful with 1.7/1.8 clients on 1.8 servers.
+    # There is a forced 0.03 expansion from 1.9-1.18.1 (not 1.18.2), or some client/server combos due to
+    # protocol changes and limitations. This check works best with 1.7/1.8 clients on 1.8 servers.
     threshold: 0.0005
-    # Should we cancel hits that we know are impossible?
-    # 3.00-3.03 hits may go through but still be flagged, due to packet order limitations
+    # Should we cancel hits that are known to be impossible?
+    # Hits of 3.00-3.03 may go through but will still be flagged due to packet order limits.
     block-impossible-hits: true
-    # This will send an additional packet at the end of every tick to increase the likelihood of catching cheats
-    # This injects into server's connection list to send a final packet just before the server flushes
-    # Enabling this will increase bandwidth usage for all players
-    # This will not decrease overall server performance
-    # Enabling this will catch more cheaters.
-    # Leaving this disabled will still catch cheaters and will not cause false positives
-    # Unless you are a 1.8 PvP focused server, this additional packet is not recommended
+    # Sends an extra packet at the end of every tick to catch more cheaters.
+    # Injected into the server connection list to send just before player is removed.
+    # Increases bandwidth for all players.
+    # Does not reduce server performance.
+    # If enabled, catches more cheaters.
+    # If disabled, cheaters are still detected without false flags.
+    # If not a 1.8 PvP server, do not enable this.
     enable-post-packet: false
 
 exploit:
-    # You can gain high speeds when sprint jumping with an elytra, this prevents the exploit when set to false
-    # Mojang screwed up netcode by making elytra start client sided and elytra end server sided
-    # Elytras take 0.99 horizontal friction, so constantly adding 0.2 horizontal speeds results in very high speeds.
     allow-sprint-jumping-when-using-elytra: true
-    # This option mitigates the player's placement on ghostblocks by resynchronizing the player when it happens
+    # Mitigates ghost block placement by resyncing player when it happens.
     allow-building-on-ghostblocks: true
-    # This setting, influenced by the boolean above defines the distance to check for ghost blocks
-    # Its valid range is limited from 2 to 4
     distance-to-check-if-ghostblocks: 2
 
-# Enable logging plugins who have injected into netty on join to debug compatibility issues
+# Enable logging of plugins that hook into Netty on join, for debugging compatibility issues
 debug-pipeline-on-join: false
 
 # Enables experimental checks
-experimental-checks: false
+experimental-checks: true
 
 reset-item-usage-on-item-update: true
 reset-item-usage-on-attack: true
 reset-item-usage-on-slot-change: true
 
-# Grim sometimes cancels illegal packets such as with timer, after X packets in a second cancelled, when should
-# we simply kick the player? This is required as some packet limiters don't count packets cancelled by grim.
+# Grim may cancel illegal packets, like with timer. After X packets per second are cancelled,
+# should we just kick the player? Needed because some packet limiters ignore Grim's cancelled packets.
 packet-spam-threshold: 100
 # Enable this to print a stacktrace when a player is kicked due to packet-spam-threshold
 debug-packet-cancel: false
 
-# Grim is able to enforce that a player set out of flying state cannot have more than X milliseconds of ping
-# This is due to Grim not currently checking flying players
+# Grim can ensure a player falling out of flying state doesn't have a ping over X ms.
+# This matters because Grim currently doesn't check flying players.
 # To disable, use -1
 max-ping-out-of-flying: 1000
 
-# Maximum ping when a firework boost is removed from the player.
-# This prevents high latency players from being able to use 1 firework boost with an elytra forever.
+# Maximum ping allowed when a firework boost is removed.
+# Prevents high latency players from using 1 firework boost with elytra indefinitely.
 max-ping-firework-boost: 1000
 
 config-version: 9
