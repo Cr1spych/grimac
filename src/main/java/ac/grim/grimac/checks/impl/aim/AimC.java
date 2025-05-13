@@ -16,31 +16,36 @@ public class AimC extends Check implements RotationCheck {
 
     private final List<Float> deltaXRots = new ArrayList<>();
     private final List<Float> deltaYRots = new ArrayList<>();
-    private double buffer, maxBuffer;
 
     public AimC(GrimPlayer player) {
         super(player);
     }
 
+    private double buffer, maxBuffer;
+    private boolean duplicatedX, duplicatedY;
+
     @Override
     public void process(RotationUpdate rotationUpdate) {
         float deltaXRot = rotationUpdate.getDeltaXRotABS();
         float deltaYRot = rotationUpdate.getDeltaYRotABS();
-        if (rotationUpdate.isCinematic() || player.inVehicle()) {
-            return;
-        }
-
-        if (deltaXRot < 0.45 || deltaYRot < 0.45 || rotationUpdate.isCinematic() || player.inVehicle() || player.getVerticalSensitivity() > 0.70 || player.getHorizontalSensitivity() > 0.70) {
+        if (deltaXRot < 0.45 || deltaYRot < 0.45 || player.inVehicle() || player.getVerticalSensitivity() > 0.70 || player.getHorizontalSensitivity() > 0.70) {
             return;
         }
 
         deltaXRots.add(deltaXRot);
         deltaYRots.add(deltaYRot);
 
-        boolean hasDuplicatedXRots = AimUtils.hasDuplicates(deltaXRots, 25) && deltaXRots.size() > 50;
-        boolean hasDuplicatedYRots = AimUtils.hasDuplicates(deltaYRots, 25) && deltaYRots.size() > 50;
+        if (deltaXRots.size() >= 50) {
+            duplicatedX = AimUtils.hasDuplicates(deltaXRots, 27);
+            deltaXRots.remove(0);
+        }
 
-        if (hasDuplicatedXRots || hasDuplicatedYRots) {
+        if (deltaYRots.size() >= 50) {
+            duplicatedY = AimUtils.hasDuplicates(deltaYRots, 27);
+            deltaYRots.remove(0);
+        }
+
+        if (duplicatedX || duplicatedY) {
             buffer++;
         } else {
             buffer = Math.max(0, buffer - 0.0005f);
@@ -48,13 +53,8 @@ public class AimC extends Check implements RotationCheck {
 
         if (buffer > maxBuffer) {
             flagAndAlert();
-            buffer = 1;
-            deltaXRots.clear();
-            deltaYRots.clear();
+            buffer = 0;
         }
-
-        if (deltaXRots.size() > 50) deltaXRots.remove(0);
-        if (deltaYRots.size() > 50) deltaYRots.remove(0);
     }
 
     @Override

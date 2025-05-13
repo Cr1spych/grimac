@@ -30,16 +30,18 @@ public class AimB extends Check implements RotationCheck {
         deltaXRots.add(deltaXRot);
         deltaYRots.add(deltaYRot);
 
-        if (deltaXRots.size() >= 10 && deltaYRots.size() >= 10) {
+        if (deltaXRots.size() >= 10) {
             xStDev = (float) Statistics.getStandardDeviation(deltaXRots);
+            deltaXRots.remove(0);
+        }
+
+        if (deltaYRots.size() >= 10) {
             yStDev = (float) Statistics.getStandardDeviation(deltaYRots);
+            deltaYRots.remove(0);
         }
 
         if ((xStDev > 3.6f && yStDev <= 0.0f) || (yStDev > 3.6f && xStDev <= 0.0f)) {
             flagAndAlert();
         }
-
-        if (deltaXRots.size() > 10) deltaXRots.remove(0);
-        if (deltaYRots.size() > 10) deltaYRots.remove(0);
     }
 }

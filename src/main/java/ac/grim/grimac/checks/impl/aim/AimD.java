@@ -22,6 +22,7 @@ public class AimD extends Check implements RotationCheck {
     }
 
     private double buffer, maxBuffer;
+    private boolean alternatingX, alternatingY;
 
     @Override
     public void process(RotationUpdate rotationUpdate) {
@@ -34,24 +35,25 @@ public class AimD extends Check implements RotationCheck {
         deltaXRots.add(deltaXRot);
         deltaYRots.add(deltaYRot);
 
-        boolean validSize = deltaXRots.size() >= 25 && deltaYRots.size() >= 25;
-
-        if (validSize) {
-            boolean hasAlternatingPattern = AimUtils.hasAlternatingPattern(deltaXRots) || AimUtils.hasAlternatingPattern(deltaYRots);
-
-            if (hasAlternatingPattern) {
-                buffer++;
-            } else {
-                buffer = Math.max(0, buffer - 0.02f);
-            }
-            if (buffer > maxBuffer) {
-                flagAndAlert();
-                buffer = 1;
-            }
+        if (deltaXRots.size() >= 25) {
+            alternatingX = AimUtils.hasAlternatingPattern(deltaXRots);
+            deltaXRots.remove(0);
         }
 
-        if (deltaXRots.size() > 25) deltaXRots.remove(0);
-        if (deltaYRots.size() > 25) deltaYRots.remove(0);
+        if (deltaYRots.size() >= 25) {
+            alternatingY = AimUtils.hasAlternatingPattern(deltaYRots);
+            deltaYRots.remove(0);
+        }
+
+        if (alternatingX || alternatingY) {
+            buffer++;
+        } else {
+            buffer = Math.max(0, buffer - 0.02f);
+        }
+        if (buffer > maxBuffer) {
+            flagAndAlert();
+            buffer = 0;
+        }
     }
 
     @Override

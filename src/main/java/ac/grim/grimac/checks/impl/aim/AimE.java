@@ -20,6 +20,9 @@ public class AimE extends Check implements RotationCheck {
     public void process(RotationUpdate rotationUpdate) {
         float deltaXRot = rotationUpdate.getDeltaXRotABS();
         float deltaYRot = rotationUpdate.getDeltaYRotABS();
+        if (player.inVehicle()) {
+            return;
+        }
 
         boolean isXRounded = deltaXRot == 1.0 || deltaXRot == 2.0 || deltaXRot == 3.0 || deltaXRot == 4.0 || deltaXRot == 5.0;
         boolean isYRounded = deltaYRot == 1.0 || deltaYRot == 2.0 || deltaYRot == 3.0 || deltaYRot == 4.0 || deltaYRot == 5.0;
@@ -31,7 +34,7 @@ public class AimE extends Check implements RotationCheck {
         }
         if (buffer > maxBuffer) {
             flagAndAlert();
-            buffer = 1;
+            buffer = 0;
         }
     }
 
