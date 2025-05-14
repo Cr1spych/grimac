@@ -23,7 +23,7 @@ public class AimA extends Check implements RotationCheck {
         float deltaXRot = rotationUpdate.getDeltaXRotABS();
         float deltaYRot = rotationUpdate.getDeltaYRotABS();
 
-        if (rotationUpdate.isCinematic() || player.inVehicle()) {
+        if (player.inVehicle()) {
             return;
         }
 

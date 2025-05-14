@@ -44,6 +44,6 @@ public class InventoryC extends Check implements PacketCheck {
 
     @Override
     public void onReload(ConfigManager configManager) {
-        this.maxBuffer = configManager.getDoubleElse("InventoryC.buffer", 3.0);
+        this.maxBuffer = configManager.getDoubleElse("InventoryC.buffer", 2.0);
     }
 }
