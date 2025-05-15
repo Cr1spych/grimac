@@ -33,7 +33,7 @@ public class BadPacketsE extends Check implements PacketCheck {
         }
 
         if (noReminderTicks > 20) {
-            flagAndAlert("ticks=" + noReminderTicks); // ban?  I don't know how this would false
+            fail("ticks=" + noReminderTicks); // ban?  I don't know how this would false
         }
     }
 

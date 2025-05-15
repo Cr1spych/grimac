@@ -62,7 +62,7 @@ public class AirLiquidBreak extends Check implements BlockBreakCheck {
                 // or the client claims to have broken an unbreakable block
                 || block.getHardness() == -1.0f && blockBreak.action == DiggingAction.FINISHED_DIGGING;
 
-        if (invalid && flagAndAlert("block=" + block.getName() + ", type=" + blockBreak.action) && shouldModifyPackets()) {
+        if (invalid && fail("block=" + block.getName() + ", type=" + blockBreak.action) && shouldModifyPackets()) {
             didLastFlag = true;
             blockBreak.cancel();
         } else {

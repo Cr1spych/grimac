@@ -39,7 +39,7 @@ public class MultiBreak extends Check implements BlockBreakCheck {
                     + ", pos=" + MessageUtil.toUnlabledString(blockBreak.position)
                     + ", lastPos=" + MessageUtil.toUnlabledString(lastPos);
             if (!player.canSkipTicks()) {
-                if (flagAndAlert(verbose) && shouldModifyPackets()) {
+                if (fail(verbose) && shouldModifyPackets()) {
                     blockBreak.cancel();
                 }
             } else {
@@ -65,7 +65,7 @@ public class MultiBreak extends Check implements BlockBreakCheck {
 
         if (player.isTickingReliablyFor(3)) {
             for (String verbose : flags) {
-                flagAndAlert(verbose);
+                fail(verbose);
             }
         }
 

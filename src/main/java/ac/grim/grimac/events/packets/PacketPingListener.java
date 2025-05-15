@@ -36,7 +36,7 @@ public class PacketPingListener extends PacketListenerAbstract {
             if (id <= 0) {
                 // check if accepted
                 if (!transaction.isAccepted()) {
-                    player.checkManager.getPacketCheck(BadPacketsS.class).flagAndAlert();
+                    player.checkManager.getPacketCheck(BadPacketsS.class).fail();
                     event.setCancelled(true);
                     return;
                 }

@@ -39,7 +39,7 @@ public class MultiPlace extends BlockPlaceCheck {
                     + ", cursor=" + MessageUtil.toUnlabledString(cursor) + ", lastCursor=" + MessageUtil.toUnlabledString(lastCursor)
                     + ", pos=" + MessageUtil.toUnlabledString(pos) + ", lastPos=" + MessageUtil.toUnlabledString(lastPos);
             if (!player.canSkipTicks()) {
-                if (flagAndAlert(verbose) && shouldModifyPackets() && shouldCancel()) {
+                if (fail(verbose) && shouldModifyPackets() && shouldCancel()) {
                     place.resync();
                 }
             } else {
@@ -66,7 +66,7 @@ public class MultiPlace extends BlockPlaceCheck {
 
         if (player.isTickingReliablyFor(3)) {
             for (String verbose : flags) {
-                flagAndAlert(verbose);
+                fail(verbose);
             }
         }
 

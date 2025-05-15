@@ -54,7 +54,7 @@ public class PositionBreakA extends Check implements BlockBreakCheck {
             default -> false;
         };
 
-        if (flag && flagAndAlert("action=" + blockBreak.action + ", face=" + blockBreak.face) && shouldModifyPackets()) {
+        if (flag && fail("action=" + blockBreak.action + ", face=" + blockBreak.face) && shouldModifyPackets()) {
             blockBreak.cancel();
         }
     }

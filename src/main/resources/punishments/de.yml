@@ -150,6 +150,7 @@ Punishments:
         remove-violations-after: 600
         checks:
             - "Inventory"
+            - "ItemScroller"
         commands:
             - "1:1 [alert]"
             - "20:20 kick %player% &cGrim &7» &bInventory"

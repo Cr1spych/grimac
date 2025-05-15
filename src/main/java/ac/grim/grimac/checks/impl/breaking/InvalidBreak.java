@@ -22,7 +22,7 @@ public class InvalidBreak extends Check implements BlockBreakCheck {
 
         if (blockBreak.faceId < 0 || blockBreak.faceId > 5) {
             // ban
-            if (flagAndAlert("face=" + blockBreak.faceId + ", action=" + blockBreak.action) && shouldModifyPackets()) {
+            if (fail("face=" + blockBreak.faceId + ", action=" + blockBreak.action) && shouldModifyPackets()) {
                 blockBreak.cancel();
             }
         }

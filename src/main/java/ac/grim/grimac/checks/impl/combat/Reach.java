@@ -152,11 +152,11 @@ public class Reach extends Check implements PacketCheck {
             switch (result.type()) {
                 case REACH -> {
                     String added = reachEntity.getType() == EntityTypes.PLAYER ? "" : ", type=" + reachEntity.getType().getName().getKey();
-                    flagAndAlert(result.verbose() + added);
+                    fail(result.verbose() + added);
                 }
                 case HITBOX -> {
                     String added = reachEntity.getType() == EntityTypes.PLAYER ? "" : "type=" + reachEntity.getType().getName().getKey();
-                    player.checkManager.getPacketCheck(Hitboxes.class).flagAndAlert(result.verbose() + added);
+                    player.checkManager.getPacketCheck(Hitboxes.class).fail(result.verbose() + added);
                 }
             }
         }

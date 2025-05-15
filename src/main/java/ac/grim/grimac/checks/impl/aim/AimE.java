@@ -33,7 +33,7 @@ public class AimE extends Check implements RotationCheck {
             buffer = Math.max(0, buffer - 0.05f);
         }
         if (buffer > maxBuffer) {
-            flagAndAlert();
+            fail();
             buffer = 0;
         }
     }

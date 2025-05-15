@@ -29,7 +29,7 @@ public class MultiActionsC extends BlockPlaceCheck {
         block = true;
         if (entity) {
             if (!player.canSkipTicks()) {
-                if (flagAndAlert("place") && shouldModifyPackets() && shouldCancel()) {
+                if (fail("place") && shouldModifyPackets() && shouldCancel()) {
                     place.resync();
                 }
             } else {
@@ -44,7 +44,7 @@ public class MultiActionsC extends BlockPlaceCheck {
             entity = true;
             if (block) {
                 if (!player.canSkipTicks()) {
-                    if (flagAndAlert("entity") && shouldModifyPackets()) {
+                    if (fail("entity") && shouldModifyPackets()) {
                         event.setCancelled(true);
                         player.onPacketCancel();
                     }
@@ -60,7 +60,7 @@ public class MultiActionsC extends BlockPlaceCheck {
                 block = true;
                 if (entity) {
                     if (!player.canSkipTicks()) {
-                        if (flagAndAlert("dig") && shouldModifyPackets()) {
+                        if (fail("dig") && shouldModifyPackets()) {
                             event.setCancelled(true);
                             player.onPacketCancel();
                             resyncPosition(player, packet.getBlockPosition());
@@ -83,7 +83,7 @@ public class MultiActionsC extends BlockPlaceCheck {
 
         if (player.isTickingReliablyFor(3)) {
             for (String verbose : flags) {
-                flagAndAlert(verbose);
+                fail(verbose);
             }
         }
 

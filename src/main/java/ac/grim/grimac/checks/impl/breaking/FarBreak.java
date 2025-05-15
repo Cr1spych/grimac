@@ -38,7 +38,7 @@ public class FarBreak extends Check implements BlockBreakCheck {
             maxReach += Math.hypot(threshold, threshold);
         }
 
-        if (min > maxReach * maxReach && flagAndAlert(String.format("distance=%.2f", Math.sqrt(min))) && shouldModifyPackets()) {
+        if (min > maxReach * maxReach && fail(String.format("distance=%.2f", Math.sqrt(min))) && shouldModifyPackets()) {
             blockBreak.cancel();
         }
     }

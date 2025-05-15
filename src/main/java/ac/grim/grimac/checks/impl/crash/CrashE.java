@@ -21,7 +21,7 @@ public class CrashE extends Check implements PacketCheck {
             WrapperPlayClientSettings wrapper = new WrapperPlayClientSettings(event);
             int viewDistance = wrapper.getViewDistance();
             if (viewDistance < 2) {
-                flagAndAlert("distance=" + viewDistance);
+                fail("distance=" + viewDistance);
                 wrapper.setViewDistance(2);
             }
         }

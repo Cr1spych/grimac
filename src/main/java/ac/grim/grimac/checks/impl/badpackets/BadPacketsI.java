@@ -18,7 +18,7 @@ public class BadPacketsI extends Check implements PacketCheck {
     public void onPacketReceive(PacketReceiveEvent event) {
         if (event.getPacketType() == PacketType.Play.Client.PLAYER_ABILITIES) {
             if (new WrapperPlayClientPlayerAbilities(event).isFlying() && !player.canFly) {
-                if (flagAndAlert() && shouldModifyPackets()) {
+                if (fail() && shouldModifyPackets()) {
                     event.setCancelled(true);
                     player.onPacketCancel();
                 }

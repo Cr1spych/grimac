@@ -39,7 +39,7 @@ public class BadPacketsM extends Check implements PacketCheck {
                 // INTERACT_AT then INTERACT
                 case INTERACT:
                     if (!sentInteractAt) {
-                        if (flagAndAlert("Missed Interact-At") && shouldModifyPackets()) {
+                        if (fail("Missed Interact-At") && shouldModifyPackets()) {
                             event.setCancelled(true);
                             player.onPacketCancel();
                         }
@@ -48,7 +48,7 @@ public class BadPacketsM extends Check implements PacketCheck {
                     break;
                 case INTERACT_AT:
                     if (sentInteractAt) {
-                        if (flagAndAlert("Missed Interact") && shouldModifyPackets()) {
+                        if (fail("Missed Interact") && shouldModifyPackets()) {
                             event.setCancelled(true);
                             player.onPacketCancel();
                         }

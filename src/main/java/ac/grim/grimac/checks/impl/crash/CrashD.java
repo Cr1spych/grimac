@@ -41,7 +41,7 @@ public class CrashD extends Check implements PacketCheck {
             int windowId = click.getWindowId();
 
             if (type == MenuType.LECTERN && windowId > 0 && windowId == lecternId) {
-                if (flagAndAlert("clickType=" + clickType + " button=" + button)) {
+                if (fail("clickType=" + clickType + " button=" + button)) {
                     event.setCancelled(true);
                     player.onPacketCancel();
                 }

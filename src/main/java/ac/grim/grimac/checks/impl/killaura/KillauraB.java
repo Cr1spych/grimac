@@ -51,7 +51,7 @@ public class KillauraB extends Check implements PostPredictionCheck {
             switch (new WrapperPlayClientEntityAction(event).getAction()) {
                 case START_SNEAKING, STOP_SNEAKING -> {
                     if (sneak) {
-                        if (player.canSkipTicks() || flagAndAlert()) {
+                        if (player.canSkipTicks() || fail()) {
                             flags++;
                         }
                     }
@@ -64,7 +64,7 @@ public class KillauraB extends Check implements PostPredictionCheck {
                     }
 
                     if (sprint) {
-                        if (player.canSkipTicks() || flagAndAlert()) {
+                        if (player.canSkipTicks() || fail()) {
                             flags++;
                         }
                     }

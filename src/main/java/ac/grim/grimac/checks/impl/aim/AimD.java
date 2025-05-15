@@ -49,7 +49,7 @@ public class AimD extends Check implements RotationCheck {
             buffer = Math.max(0, buffer - 0.02f);
         }
         if (buffer > maxBuffer) {
-            flagAndAlert();
+            fail();
             buffer = 0;
         }
 

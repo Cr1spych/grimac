@@ -16,6 +16,7 @@ public class InventoryC extends Check implements PacketCheck {
 
     private long lastClickWindowTime = -1;
     private double buffer, maxBuffer;
+    private boolean cancelClicks;
 
     @Override
     public void onPacketReceive(PacketReceiveEvent event) {
@@ -33,8 +34,11 @@ public class InventoryC extends Check implements PacketCheck {
                 }
 
                 if (buffer > maxBuffer) {
-                    flagAndAlert();
                     buffer = 0;
+                    fail();
+                    if (cancelClicks) {
+                        event.setCancelled(true);
+                    }
                 }
             }
 
@@ -45,5 +49,6 @@ public class InventoryC extends Check implements PacketCheck {
     @Override
     public void onReload(ConfigManager configManager) {
         this.maxBuffer = configManager.getDoubleElse("InventoryC.buffer", 2.0);
+        this.cancelClicks = configManager.getBooleanElse("InventoryC.cancelClicks", true);
     }
 }

@@ -22,7 +22,7 @@ public class VehicleD extends Check implements PacketCheck {
             final EntityType vehicle = player.inVehicle() ? player.compensatedEntities.self.getRiding().getType() : null;
 
             if (!EntityTypes.isTypeInstanceOf(vehicle, EntityTypes.ABSTRACT_HORSE)) {
-                flagAndAlert("vehicle=" + (vehicle == null ? "null" : vehicle.getName().getKey().toLowerCase()));
+                fail("vehicle=" + (vehicle == null ? "null" : vehicle.getName().getKey().toLowerCase()));
             }
         }
     }

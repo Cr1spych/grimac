@@ -21,7 +21,7 @@ public class InvalidPlaceB extends BlockPlaceCheck {
 
         if (place.getFaceId() < 0 || place.getFaceId() > 5) {
             // ban
-            if (flagAndAlert("direction=" + place.getFaceId()) && shouldModifyPackets() && shouldCancel()) {
+            if (fail("direction=" + place.getFaceId()) && shouldModifyPackets() && shouldCancel()) {
                 place.resync();
             }
         }

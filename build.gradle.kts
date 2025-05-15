@@ -26,7 +26,7 @@ spotless {
 }
 
 group = "ac.grim.grimac"
-version = "0.0.31"
+version = "0.0.32"
 description = "Libre simulation anticheat designed for 1.21 with 1.8-1.21 support, powered by PacketEvents 2.0."
 
 // Set to false for debug builds

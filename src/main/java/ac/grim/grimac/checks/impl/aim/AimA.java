@@ -32,14 +32,14 @@ public class AimA extends Check implements RotationCheck {
 
         boolean hasExceeding = xRotExceeding > 2 || yRotExceeding > 2;
 
-        if (((deltaXRot > 50 && lastDeltaXRot < 4.7) || (deltaYRot > 45 && lastDeltaYRot < 4.7)) && !hasExceeding && player.actionManager.hasAttackedSince(80)) {
+        if (((deltaXRot > 50 && lastDeltaXRot < 5.1) || (deltaYRot > 45 && lastDeltaYRot < 5.1)) && !hasExceeding && player.actionManager.hasAttackedSince(90)) {
             buffer++;
         } else {
-            buffer = Math.max(0, buffer - 0.04f);
+            buffer = Math.max(0, buffer - 0.03f);
         }
 
         if (buffer > maxBuffer) {
-            flagAndAlert();
+            fail();
             buffer = 0;
         }
 

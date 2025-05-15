@@ -17,7 +17,7 @@ public class InvalidPlaceA extends BlockPlaceCheck {
         Vector3f cursor = place.getCursor();
         if (cursor == null) return;
         if (!Float.isFinite(cursor.getX()) || !Float.isFinite(cursor.getY()) || !Float.isFinite(cursor.getZ())) {
-            if (flagAndAlert() && shouldModifyPackets() && shouldCancel()) {
+            if (fail() && shouldModifyPackets() && shouldCancel()) {
                 place.resync();
             }
         }

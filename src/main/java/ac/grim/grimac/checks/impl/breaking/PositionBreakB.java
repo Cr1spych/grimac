@@ -27,7 +27,7 @@ public class PositionBreakB extends Check implements BlockBreakCheck {
         }
 
         if (lastFace != null) {
-            flagAndAlert("lastFace=" + lastFace + ", action=" + blockBreak.action);
+            fail("lastFace=" + lastFace + ", action=" + blockBreak.action);
         }
 
         if (blockBreak.action == DiggingAction.CANCELLED_DIGGING) {

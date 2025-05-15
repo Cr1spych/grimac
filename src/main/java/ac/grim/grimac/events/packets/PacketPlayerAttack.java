@@ -36,7 +36,7 @@ public class PacketPlayerAttack extends PacketListenerAbstract {
             // The entity does not exist
             if (!player.compensatedEntities.entityMap.containsKey(interact.getEntityId()) && !player.compensatedEntities.serverPositionsMap.containsKey(interact.getEntityId())) {
                 final BadPacketsW badPacketsW = player.checkManager.getPacketCheck(BadPacketsW.class);
-                if (badPacketsW.flagAndAlert("entityId=" + interact.getEntityId()) && badPacketsW.shouldModifyPackets()) {
+                if (badPacketsW.fail("entityId=" + interact.getEntityId()) && badPacketsW.shouldModifyPackets()) {
                     event.setCancelled(true);
                     player.onPacketCancel();
                 }

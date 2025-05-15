@@ -30,7 +30,7 @@ public class Baritone extends Check implements RotationCheck {
             if (rotationUpdate.getProcessor().divisorY < GrimMath.MINIMUM_DIVISOR) {
                 verbose++;
                 if (verbose > 8) {
-                    flagAndAlert("Divisor " + AimProcessor.convertToSensitivity(rotationUpdate.getProcessor().divisorX));
+                    fail("Divisor " + AimProcessor.convertToSensitivity(rotationUpdate.getProcessor().divisorX));
                 }
             } else {
                 verbose = 0;

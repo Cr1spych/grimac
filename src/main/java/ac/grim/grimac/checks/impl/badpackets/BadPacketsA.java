@@ -21,7 +21,7 @@ public class BadPacketsA extends Check implements PacketCheck {
         if (event.getPacketType() == PacketType.Play.Client.HELD_ITEM_CHANGE) {
             final int slot = new WrapperPlayClientHeldItemChange(event).getSlot();
 
-            if (slot == lastSlot && flagAndAlert("slot=" + slot) && shouldModifyPackets()) {
+            if (slot == lastSlot && fail("slot=" + slot) && shouldModifyPackets()) {
                 event.setCancelled(true);
                 player.onPacketCancel();
             }

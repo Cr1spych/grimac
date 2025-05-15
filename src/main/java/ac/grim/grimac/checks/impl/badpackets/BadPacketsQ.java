@@ -23,7 +23,7 @@ public class BadPacketsQ extends Check implements PacketCheck {
             if (Math.abs(wrapper.getJumpBoost()) > 100
                     || wrapper.getEntityId() != player.entityID
                     || wrapper.getAction() != Action.START_JUMPING_WITH_HORSE && wrapper.getJumpBoost() != 0) {
-                if (flagAndAlert("boost=" + wrapper.getJumpBoost() + ", action=" + wrapper.getAction() + ", entity=" + wrapper.getEntityId()) && shouldModifyPackets()) {
+                if (fail("boost=" + wrapper.getJumpBoost() + ", action=" + wrapper.getAction() + ", entity=" + wrapper.getEntityId()) && shouldModifyPackets()) {
                     event.setCancelled(true);
                     player.onPacketCancel();
                 }

@@ -30,7 +30,7 @@ public class MultiActionsB extends Check implements PacketCheck {
             final WrapperPlayClientPlayerDigging packet = new WrapperPlayClientPlayerDigging(event);
 
             if (packet.getAction() == DiggingAction.START_DIGGING || packet.getAction() == DiggingAction.CANCELLED_DIGGING || packet.getAction() == DiggingAction.FINISHED_DIGGING) {
-                if (flagAndAlert() && shouldModifyPackets()) {
+                if (fail() && shouldModifyPackets()) {
                     event.setCancelled(true);
                     player.onPacketCancel();
                     resyncPosition(player, packet.getBlockPosition());

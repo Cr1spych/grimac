@@ -23,7 +23,7 @@ public class ElytraA extends Check implements PostPredictionCheck {
             return;
         }
 
-        if (player.isGliding && flagAndAlert()) {
+        if (player.isGliding && fail()) {
             setback = true;
             if (shouldModifyPackets()) {
                 event.setCancelled(true);

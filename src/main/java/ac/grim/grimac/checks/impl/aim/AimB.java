@@ -13,8 +13,8 @@ import java.util.List;
 @CheckData(name = "AimB")
 public class AimB extends Check implements RotationCheck {
 
-    private List<Float> deltaXRots = new ArrayList<>();
-    private List<Float> deltaYRots = new ArrayList<>();
+    private final List<Float> deltaXRots = new ArrayList<>();
+    private final List<Float> deltaYRots = new ArrayList<>();
 
     public AimB(GrimPlayer player) {
         super(player);
@@ -26,6 +26,7 @@ public class AimB extends Check implements RotationCheck {
     public void process(RotationUpdate rotationUpdate) {
         float deltaXRot = rotationUpdate.getDeltaXRot();
         float deltaYRot = rotationUpdate.getDeltaYRot();
+        float pitch = Math.abs(rotationUpdate.getTo().getPitch());
         if (player.inVehicle() || rotationUpdate.isCinematic()) {
             return;
         }
@@ -41,8 +42,8 @@ public class AimB extends Check implements RotationCheck {
             yStDev = (float) Statistics.getStandardDeviation(deltaYRots);
         }
 
-        if ((xStDev > 3.6f && yStDev <= 0.0f) || (yStDev > 3.6f && xStDev <= 0.0f)) {
-            flagAndAlert();
+        if (((xStDev > 3.6f && yStDev <= 0.0f) || (yStDev > 3.6f && xStDev <= 0.0f) && pitch < 85)) {
+            fail();
         }
 
         if (deltaXRots.size() > 10) {

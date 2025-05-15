@@ -28,6 +28,7 @@ public class InventoryA extends Check implements PacketCheck {
         }
 
         if (Packet.isAttack(event) && hasInventoryOpen) {
+            fail();
             if (cancelHits) {
                 event.setCancelled(true);
             }

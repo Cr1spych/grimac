@@ -6,15 +6,14 @@
 AimA:
     buffer: 1.0
 
-AimB:
-    buffer: 8.0
-
 AimC:
-    buffer: 2.0
+    buffer: 4.0
 
 AimD:
     buffer: 2.0
 
+AimE:
+    buffer: 2.0
 
 
 #-----------------#
@@ -25,7 +24,6 @@ AutoclickerA:
     buffer: 4.8
     increaseBuffer: 1.6
     decreaseBuffer: 1.1
-
     cancelHits: true
 
 #-----------------#
@@ -40,20 +38,18 @@ InventoryB:
 
 InventoryC:
     buffer: 2.0
+    cancelClicks: true
+
+ItemScroller:
+    buffer: 2.0
 
 #-----------------#
 # Killaura        #
 #-----------------#
 
-KillauraA:
-    cancelHits: true
-
 KillauraC:
     cancelHits: true
     buffer: 1.0
-
-KillauraD:
-    cancelHits: true
 
 alerts:
     # Besides broadcasting alerts to players, should they also be sent to the console?

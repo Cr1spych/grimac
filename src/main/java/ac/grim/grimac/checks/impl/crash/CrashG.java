@@ -27,7 +27,7 @@ public class CrashG extends Check implements PacketCheck {
         if (event.getPacketType() == PacketType.Play.Client.PLAYER_BLOCK_PLACEMENT) {
             WrapperPlayClientPlayerBlockPlacement place = new WrapperPlayClientPlayerBlockPlacement(event);
             if (place.getSequence() < 0) {
-                flagAndAlert();
+                fail();
                 event.setCancelled(true);
                 player.onPacketCancel();
             }
@@ -36,7 +36,7 @@ public class CrashG extends Check implements PacketCheck {
         if (event.getPacketType() == PacketType.Play.Client.PLAYER_DIGGING) {
             WrapperPlayClientPlayerDigging dig = new WrapperPlayClientPlayerDigging(event);
             if (dig.getSequence() < 0) {
-                flagAndAlert();
+                fail();
                 event.setCancelled(true);
                 player.onPacketCancel();
             }
@@ -45,7 +45,7 @@ public class CrashG extends Check implements PacketCheck {
         if (event.getPacketType() == PacketType.Play.Client.USE_ITEM) {
             WrapperPlayClientUseItem use = new WrapperPlayClientUseItem(event);
             if (use.getSequence() < 0) {
-                flagAndAlert();
+                fail();
                 event.setCancelled(true);
                 player.onPacketCancel();
             }

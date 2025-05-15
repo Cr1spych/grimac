@@ -74,7 +74,7 @@ public class Timer extends Check implements PacketCheck {
 
     public void doCheck(final PacketReceiveEvent event) {
         if (timerBalanceRealTime > System.nanoTime()) {
-            if (flagAndAlert()) {
+            if (fail()) {
                 // Cancel the packet
                 // Only cancel if not an adjustment setback
                 if (shouldModifyPackets()) {

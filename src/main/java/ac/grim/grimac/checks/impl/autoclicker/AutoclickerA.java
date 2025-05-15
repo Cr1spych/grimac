@@ -37,7 +37,7 @@ public class AutoclickerA extends Check implements PacketCheck {
                 }
 
                 if (buffer > maxBuffer) {
-                    flagAndAlert();
+                    fail();
                     buffer = maxBuffer - 1.0;
                     if (cancelHits) {
                         event.setCancelled(true);

@@ -20,7 +20,7 @@ public class InventoryB extends Check implements PacketCheck {
     public void onPacketReceive(PacketReceiveEvent event) {
         if (Packet.isClickWindow(event)) {
             if (player.isSprinting) {
-                flagAndAlert();
+                fail();
                 if (cancelClicks) {
                     event.setCancelled(true);
                 }

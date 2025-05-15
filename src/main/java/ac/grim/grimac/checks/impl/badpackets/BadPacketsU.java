@@ -51,7 +51,7 @@ public class BadPacketsU extends Check implements PacketCheck {
                             "xyz=%s, %s, %s, cursor=%s, %s, %s, item=%s, sequence=%s",
                             pos.x, pos.y, pos.z, cursor.x, cursor.y, cursor.z, !failedItemCheck, packet.getSequence()
                     );
-                    if (flagAndAlert(verbose) && shouldModifyPackets()) {
+                    if (fail(verbose) && shouldModifyPackets()) {
                         player.onPacketCancel();
                         event.setCancelled(true);
                     }

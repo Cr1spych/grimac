@@ -12,7 +12,7 @@ import java.util.List;
 
 // https://github.com/ElevatedDev/Frequency/blob/master/src/main/java/xyz/elevated/frequency/check/impl/aimassist/cinematic/Cinematic.java
 @CheckData(name = "Cinematic")
-public final class Cinematic extends Check implements RotationCheck {
+public final class CinematicProcessor extends Check implements RotationCheck {
 
     private long lastSmooth = 0L, lastHighRate = 0L;
     private double lastDeltaXRot = 0.0d, lastDeltaYRot = 0.0d;
@@ -20,7 +20,7 @@ public final class Cinematic extends Check implements RotationCheck {
     private final List<Double> xSamples = Lists.newArrayList();
     private final List<Double> ySamples = Lists.newArrayList();
 
-    public Cinematic(GrimPlayer player) {
+    public CinematicProcessor(GrimPlayer player) {
         super(player);
     }
 

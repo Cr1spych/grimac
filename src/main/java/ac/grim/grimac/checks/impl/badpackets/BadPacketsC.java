@@ -21,7 +21,7 @@ public class BadPacketsC extends Check implements PacketCheck {
             if (player.gamemode == GameMode.SPECTATOR) return;
             if (new WrapperPlayClientInteractEntity(event).getEntityId() == player.entityID) {
                 // Instant ban
-                if (flagAndAlert() && shouldModifyPackets()) {
+                if (fail() && shouldModifyPackets()) {
                     event.setCancelled(true);
                     player.onPacketCancel();
                 }

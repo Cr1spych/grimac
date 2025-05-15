@@ -25,7 +25,7 @@ public class ElytraB extends Check implements PostPredictionCheck {
                 && player.supportsEndTick()
         ) {
             if (player.packetStateData.knownInput.jump()) {
-                if (flagAndAlert("no release")) {
+                if (fail("no release")) {
                     setback = true;
                     if (shouldModifyPackets()) {
                         event.setCancelled(true);
@@ -39,7 +39,7 @@ public class ElytraB extends Check implements PostPredictionCheck {
         }
 
         if (isUpdate(event.getPacketType())) {
-            if (glide && !player.packetStateData.knownInput.jump() && flagAndAlert("no jump")) {
+            if (glide && !player.packetStateData.knownInput.jump() && fail("no jump")) {
                 setback = true;
             }
 

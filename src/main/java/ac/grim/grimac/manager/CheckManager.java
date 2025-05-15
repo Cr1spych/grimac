@@ -2,7 +2,7 @@ package ac.grim.grimac.manager;
 
 import ac.grim.grimac.api.AbstractCheck;
 import ac.grim.grimac.checks.impl.aim.*;
-import ac.grim.grimac.checks.impl.aim.cinematic.Cinematic;
+import ac.grim.grimac.checks.impl.aim.cinematic.CinematicProcessor;
 import ac.grim.grimac.checks.impl.aim.grim.AimDuplicateLook;
 import ac.grim.grimac.checks.impl.aim.grim.AimModulo360;
 import ac.grim.grimac.checks.impl.aim.processor.AimProcessor;
@@ -22,10 +22,10 @@ import ac.grim.grimac.checks.impl.groundspoof.NoFall;
 import ac.grim.grimac.checks.impl.inventory.InventoryA;
 import ac.grim.grimac.checks.impl.inventory.InventoryB;
 import ac.grim.grimac.checks.impl.inventory.InventoryC;
+import ac.grim.grimac.checks.impl.inventory.scroller.ItemScroller;
 import ac.grim.grimac.checks.impl.killaura.KillauraA;
 import ac.grim.grimac.checks.impl.killaura.KillauraB;
 import ac.grim.grimac.checks.impl.killaura.KillauraC;
-import ac.grim.grimac.checks.impl.killaura.KillauraD;
 import ac.grim.grimac.checks.impl.misc.ClientBrand;
 import ac.grim.grimac.checks.impl.misc.GhostBlockMitigation;
 import ac.grim.grimac.checks.impl.misc.TransactionOrder;
@@ -95,7 +95,6 @@ public class CheckManager {
                 .put(AutoclickerA.class, new AutoclickerA(player))
                 .put(KillauraA.class, new KillauraA(player))
                 .put(KillauraC.class, new KillauraC(player))
-                .put(KillauraD.class, new KillauraD(player))
                 .put(Reach.class, new Reach(player))
                 .put(PacketEntityReplication.class, new PacketEntityReplication(player))
                 .put(PacketChangeGameState.class, new PacketChangeGameState(player))
@@ -130,6 +129,7 @@ public class CheckManager {
                 .put(InventoryA.class, new InventoryA(player))
                 .put(InventoryB.class, new InventoryB(player))
                 .put(InventoryC.class, new InventoryC(player))
+                .put(ItemScroller.class, new ItemScroller(player))
                 .put(MultiActionsB.class, new MultiActionsB(player))
                 .put(MultiActionsC.class, new MultiActionsC(player))
                 .put(MultiActionsA.class, new MultiActionsA(player))
@@ -152,10 +152,11 @@ public class CheckManager {
                 .put(AimC.class, new AimC(player))
                 .put(AimD.class, new AimD(player))
                 .put(AimE.class, new AimE(player))
+                .put(AimF.class, new AimF(player))
                 .put(AimProcessor.class, new AimProcessor(player))
                 .put(AimModulo360.class, new AimModulo360(player))
                 .put(AimDuplicateLook.class, new AimDuplicateLook(player))
-                .put(Cinematic.class, new Cinematic(player))
+                .put(CinematicProcessor.class, new CinematicProcessor(player))
 //                .put(Baritone.class, new Baritone(player))
                 .build();
         vehicleCheck = new ImmutableClassToInstanceMap.Builder<VehicleCheck>()

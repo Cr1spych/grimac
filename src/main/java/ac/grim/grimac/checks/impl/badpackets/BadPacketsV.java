@@ -28,7 +28,7 @@ public class BadPacketsV extends Check implements PacketCheck {
                     final double deltaSq = new WrapperPlayClientPlayerFlying(event).getLocation().getPosition()
                             .distanceSquared(new Vector3d(player.lastX, player.lastY, player.lastZ));
                     if (deltaSq <= player.getMovementThreshold() * player.getMovementThreshold()) {
-                        flagAndAlert("delta=" + Math.sqrt(deltaSq));
+                        fail("delta=" + Math.sqrt(deltaSq));
                     }
                 }
 

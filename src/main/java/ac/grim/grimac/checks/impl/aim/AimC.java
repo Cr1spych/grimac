@@ -28,7 +28,7 @@ public class AimC extends Check implements RotationCheck {
     public void process(RotationUpdate rotationUpdate) {
         float deltaXRot = rotationUpdate.getDeltaXRotABS();
         float deltaYRot = rotationUpdate.getDeltaYRotABS();
-        if (deltaXRot < 0.45 || deltaYRot < 0.45 || player.inVehicle() || player.getVerticalSensitivity() > 0.70 || player.getHorizontalSensitivity() > 0.70) {
+        if (deltaXRot < 0.45 || deltaYRot < 0.45 || player.inVehicle() || player.getVerticalSensitivity() > 0.68 || player.getHorizontalSensitivity() > 0.68) {
             return;
         }
 
@@ -50,7 +50,7 @@ public class AimC extends Check implements RotationCheck {
         }
 
         if (buffer > maxBuffer) {
-            flagAndAlert();
+            fail();
             buffer = 0;
         }
 
