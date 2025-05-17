@@ -40,8 +40,11 @@ InventoryC:
     buffer: 2.0
     cancelClicks: true
 
-ItemScroller:
+InventoryD:
     buffer: 2.0
+
+InventoryE:
+    cancelHits: true
 
 #-----------------#
 # Killaura        #

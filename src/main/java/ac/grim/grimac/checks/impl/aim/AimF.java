@@ -26,7 +26,7 @@ public class AimF extends Check implements RotationCheck {
         } else {
             buffer = 0;
         }
-        if (buffer > 4) {
+        if (buffer > 2) {
             fail();
             buffer = 0;
         }

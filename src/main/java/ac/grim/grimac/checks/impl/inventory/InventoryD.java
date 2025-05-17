@@ -1,4 +1,4 @@
-package ac.grim.grimac.checks.impl.inventory.scroller;
+package ac.grim.grimac.checks.impl.inventory;
 
 import ac.grim.grimac.api.config.ConfigManager;
 import ac.grim.grimac.checks.Check;
@@ -9,9 +9,9 @@ import ac.grim.grimac.utils.packet.Packet;
 import com.github.retrooper.packetevents.event.PacketReceiveEvent;
 import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientClickWindow;
 
-@CheckData(name = "ItemScroller")
-public class ItemScroller extends Check implements PacketCheck {
-    public ItemScroller(GrimPlayer player) {
+@CheckData(name = "InventoryD")
+public class InventoryD extends Check implements PacketCheck {
+    public InventoryD(GrimPlayer player) {
         super(player);
     }
 
@@ -24,7 +24,6 @@ public class ItemScroller extends Check implements PacketCheck {
             WrapperPlayClientClickWindow wrapper = new WrapperPlayClientClickWindow(event);
             if (wrapper.getWindowClickType() == WrapperPlayClientClickWindow.WindowClickType.QUICK_MOVE) {
                 long now = System.currentTimeMillis();
-
 
                 if (lastClickWindowTime > 0) {
                     long delay = now - lastClickWindowTime;
@@ -48,6 +47,6 @@ public class ItemScroller extends Check implements PacketCheck {
 
     @Override
     public void onReload(ConfigManager configManager) {
-        this.maxBuffer = configManager.getDoubleElse("ItemScroller.buffer", 2.0);
+        this.maxBuffer = configManager.getDoubleElse("InventoryD.buffer", 2.0);
     }
 }

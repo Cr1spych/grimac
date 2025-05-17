@@ -19,10 +19,7 @@ import ac.grim.grimac.checks.impl.exploit.ExploitA;
 import ac.grim.grimac.checks.impl.exploit.ExploitB;
 import ac.grim.grimac.checks.impl.exploit.ExploitC;
 import ac.grim.grimac.checks.impl.groundspoof.NoFall;
-import ac.grim.grimac.checks.impl.inventory.InventoryA;
-import ac.grim.grimac.checks.impl.inventory.InventoryB;
-import ac.grim.grimac.checks.impl.inventory.InventoryC;
-import ac.grim.grimac.checks.impl.inventory.scroller.ItemScroller;
+import ac.grim.grimac.checks.impl.inventory.*;
 import ac.grim.grimac.checks.impl.killaura.KillauraA;
 import ac.grim.grimac.checks.impl.killaura.KillauraB;
 import ac.grim.grimac.checks.impl.killaura.KillauraC;
@@ -129,7 +126,8 @@ public class CheckManager {
                 .put(InventoryA.class, new InventoryA(player))
                 .put(InventoryB.class, new InventoryB(player))
                 .put(InventoryC.class, new InventoryC(player))
-                .put(ItemScroller.class, new ItemScroller(player))
+                .put(InventoryD.class, new InventoryD(player))
+                .put(InventoryE.class, new InventoryE(player))
                 .put(MultiActionsB.class, new MultiActionsB(player))
                 .put(MultiActionsC.class, new MultiActionsC(player))
                 .put(MultiActionsA.class, new MultiActionsA(player))
