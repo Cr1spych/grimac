@@ -24,7 +24,7 @@ public class AutoclickerA extends Check implements PacketCheck {
 
     @Override
     public void onPacketReceive(PacketReceiveEvent event) {
-        if (Packet.isAttack(event)) {
+        if (Packet.isCAttack(event)) {
             long now = System.currentTimeMillis();
 
             if (lastAttackTime != -1) {

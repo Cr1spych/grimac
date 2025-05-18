@@ -30,7 +30,7 @@ public class AimA extends Check implements RotationCheck {
         if (deltaXRot > 35) xRotExceeding++; else xRotExceeding = 0;
         if (deltaYRot > 30) yRotExceeding++; else yRotExceeding = 0;
 
-        boolean hasExceeding = xRotExceeding > 2 || yRotExceeding > 2;
+        boolean hasExceeding = xRotExceeding > 3 || yRotExceeding > 3;
 
         if (((deltaXRot > 50 && lastDeltaXRot < 5.1) || (deltaYRot > 45 && lastDeltaYRot < 5.1)) && !hasExceeding && player.actionManager.hasAttackedSince(90)) {
             buffer++;

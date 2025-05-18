@@ -20,7 +20,7 @@ public class InventoryD extends Check implements PacketCheck {
 
     @Override
     public void onPacketReceive(PacketReceiveEvent event) {
-        if (Packet.isClickWindow(event)) {
+        if (Packet.isCClickWindow(event)) {
             WrapperPlayClientClickWindow wrapper = new WrapperPlayClientClickWindow(event);
             if (wrapper.getWindowClickType() == WrapperPlayClientClickWindow.WindowClickType.QUICK_MOVE) {
                 long now = System.currentTimeMillis();

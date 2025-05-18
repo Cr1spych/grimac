@@ -18,7 +18,7 @@ public class InventoryE extends Check implements PacketCheck {
 
     @Override
     public void onPacketReceive(PacketReceiveEvent event) {
-        if (Packet.isClickWindow(event)) {
+        if (Packet.isCClickWindow(event)) {
             if (player.packetStateData.isSlowedByUsingItem() && player.packetStateData.lastSlotSelected == player.packetStateData.getSlowedByUsingItemSlot()) {
                 fail();
                 if (cancelClicks) {

@@ -1,6 +1,7 @@
 package ac.grim.grimac.utils.packet;
 
 import com.github.retrooper.packetevents.event.PacketReceiveEvent;
+import com.github.retrooper.packetevents.event.PacketSendEvent;
 import com.github.retrooper.packetevents.protocol.packettype.PacketType;
 import com.github.retrooper.packetevents.protocol.player.DiggingAction;
 import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientEntityAction;
@@ -11,7 +12,7 @@ public final class Packet {
 
     private Packet() {}
 
-    public static boolean isAttack(PacketReceiveEvent event) {
+    public static boolean isCAttack(PacketReceiveEvent event) {
         if (event.getPacketType() == PacketType.Play.Client.INTERACT_ENTITY) {
             WrapperPlayClientInteractEntity packet = new WrapperPlayClientInteractEntity(event);
             return packet.getAction() == WrapperPlayClientInteractEntity.InteractAction.ATTACK;
@@ -19,39 +20,39 @@ public final class Packet {
         return false;
     }
 
-    public static boolean isInteract(PacketReceiveEvent event) {
+    public static boolean isCInteract(PacketReceiveEvent event) {
         return event.getPacketType() == PacketType.Play.Client.INTERACT_ENTITY;
     }
 
-    public static boolean isUseItem(PacketReceiveEvent event) {
+    public static boolean isCUseItem(PacketReceiveEvent event) {
         return event.getPacketType() == PacketType.Play.Client.USE_ITEM;
     }
 
-    public static boolean isRotation(PacketReceiveEvent event) {
+    public static boolean isCRotation(PacketReceiveEvent event) {
         return event.getPacketType() == PacketType.Play.Client.PLAYER_ROTATION;
     }
 
-    public static boolean isPositionAndRotation(PacketReceiveEvent event) {
+    public static boolean isCPositionAndRotation(PacketReceiveEvent event) {
         return event.getPacketType() == PacketType.Play.Client.PLAYER_POSITION_AND_ROTATION;
     }
 
-    public static boolean isPosition(PacketReceiveEvent event) {
+    public static boolean isCPosition(PacketReceiveEvent event) {
         return event.getPacketType() == PacketType.Play.Client.PLAYER_POSITION;
     }
 
-    public static boolean isClickWindow(PacketReceiveEvent event) {
+    public static boolean isCClickWindow(PacketReceiveEvent event) {
         return event.getPacketType() == PacketType.Play.Client.CLICK_WINDOW;
     }
 
-    public static boolean isCloseWindow(PacketReceiveEvent event) {
+    public static boolean isCCloseWindow(PacketReceiveEvent event) {
         return event.getPacketType() == PacketType.Play.Client.CLOSE_WINDOW;
     }
 
-    public static boolean isBlockDigging(PacketReceiveEvent event) {
+    public static boolean isCBlockDigging(PacketReceiveEvent event) {
         return event.getPacketType() == PacketType.Play.Client.PLAYER_DIGGING;
     }
 
-    public static boolean isBlockBreak(PacketReceiveEvent event) {
+    public static boolean isCBlockBreak(PacketReceiveEvent event) {
         if (event.getPacketType() == PacketType.Play.Client.PLAYER_DIGGING) {
             WrapperPlayClientPlayerDigging packet = new WrapperPlayClientPlayerDigging(event);
             return packet.getAction() == DiggingAction.FINISHED_DIGGING;
@@ -59,19 +60,19 @@ public final class Packet {
         return false;
     }
 
-    public static boolean isInput(PacketReceiveEvent event) {
+    public static boolean isCInput(PacketReceiveEvent event) {
         return event.getPacketType() == PacketType.Play.Client.PLAYER_INPUT;
     }
 
-    public static boolean isAnimation(PacketReceiveEvent event) {
+    public static boolean isCAnimation(PacketReceiveEvent event) {
         return event.getPacketType() == PacketType.Play.Client.ANIMATION;
     }
 
-    public static boolean isBlockPlace(PacketReceiveEvent event) {
+    public static boolean isCBlockPlace(PacketReceiveEvent event) {
         return event.getPacketType() == PacketType.Play.Client.PLAYER_BLOCK_PLACEMENT;
     }
 
-    public static boolean isStartSprinting(PacketReceiveEvent event) {
+    public static boolean isCStartSprinting(PacketReceiveEvent event) {
         if (event.getPacketType() == PacketType.Play.Client.ENTITY_ACTION) {
             WrapperPlayClientEntityAction packet = new WrapperPlayClientEntityAction(event);
             return packet.getAction() == WrapperPlayClientEntityAction.Action.START_SPRINTING;
@@ -79,7 +80,7 @@ public final class Packet {
         return false;
     }
 
-    public static boolean isStopSprinting(PacketReceiveEvent event) {
+    public static boolean isCStopSprinting(PacketReceiveEvent event) {
         if (event.getPacketType() == PacketType.Play.Client.ENTITY_ACTION) {
             WrapperPlayClientEntityAction packet = new WrapperPlayClientEntityAction(event);
             return packet.getAction() == WrapperPlayClientEntityAction.Action.STOP_SPRINTING;
@@ -87,7 +88,7 @@ public final class Packet {
         return false;
     }
 
-    public static boolean isStartSneaking(PacketReceiveEvent event) {
+    public static boolean isCStartSneaking(PacketReceiveEvent event) {
         if (event.getPacketType() == PacketType.Play.Client.ENTITY_ACTION) {
             WrapperPlayClientEntityAction packet = new WrapperPlayClientEntityAction(event);
             return packet.getAction() == WrapperPlayClientEntityAction.Action.START_SNEAKING;
@@ -95,7 +96,7 @@ public final class Packet {
         return false;
     }
 
-    public static boolean isStopSneaking(PacketReceiveEvent event) {
+    public static boolean isCStopSneaking(PacketReceiveEvent event) {
         if (event.getPacketType() == PacketType.Play.Client.ENTITY_ACTION) {
             WrapperPlayClientEntityAction packet = new WrapperPlayClientEntityAction(event);
             return packet.getAction() == WrapperPlayClientEntityAction.Action.STOP_SNEAKING;
@@ -103,11 +104,15 @@ public final class Packet {
         return false;
     }
 
-    public static boolean isFlying(PacketReceiveEvent event) {
+    public static boolean isCFlying(PacketReceiveEvent event) {
         return event.getPacketType() == PacketType.Play.Client.PLAYER_FLYING;
     }
 
-    public static boolean isVehicleMove(PacketReceiveEvent event) {
+    public static boolean isCVehicleMove(PacketReceiveEvent event) {
         return event.getPacketType() == PacketType.Play.Client.VEHICLE_MOVE;
+    }
+
+    public static boolean isSMetadata(PacketSendEvent event) {
+        return event.getPacketType() == PacketType.Play.Server.ENTITY_METADATA;
     }
 }

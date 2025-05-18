@@ -52,6 +52,7 @@ import ac.grim.grimac.events.packets.PacketEntityReplication;
 import ac.grim.grimac.events.packets.PacketPlayerAbilities;
 import ac.grim.grimac.events.packets.PacketWorldBorder;
 import ac.grim.grimac.manager.init.start.SuperDebug;
+import ac.grim.grimac.metadata.MetadataHider;
 import ac.grim.grimac.player.GrimPlayer;
 import ac.grim.grimac.predictionengine.GhostBlockDetector;
 import ac.grim.grimac.predictionengine.SneakingEstimator;
@@ -101,6 +102,7 @@ public class CheckManager {
                 .put(ActionManager.class, player.actionManager)
                 .put(TeamHandler.class, new TeamHandler(player))
                 .put(ClientBrand.class, new ClientBrand(player))
+                .put(MetadataHider.class, new MetadataHider(player))
                 .put(NoFall.class, new NoFall(player))
                 .put(BadPacketsO.class, new BadPacketsO(player))
                 .put(BadPacketsA.class, new BadPacketsA(player))

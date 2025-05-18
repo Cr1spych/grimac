@@ -20,7 +20,7 @@ public class InventoryC extends Check implements PacketCheck {
 
     @Override
     public void onPacketReceive(PacketReceiveEvent event) {
-        if (Packet.isClickWindow(event)) {
+        if (Packet.isCClickWindow(event)) {
             long now = System.currentTimeMillis();
 
 

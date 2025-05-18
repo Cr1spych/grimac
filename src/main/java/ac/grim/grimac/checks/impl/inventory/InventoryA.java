@@ -19,15 +19,15 @@ public class InventoryA extends Check implements PacketCheck {
 
     @Override
     public void onPacketReceive(PacketReceiveEvent event) {
-        if (Packet.isCloseWindow(event)) {
+        if (Packet.isCCloseWindow(event)) {
             hasInventoryOpen = false;
         }
 
-        if (Packet.isClickWindow(event)) {
+        if (Packet.isCClickWindow(event)) {
             hasInventoryOpen = true;
         }
 
-        if (Packet.isAttack(event) && hasInventoryOpen) {
+        if (Packet.isCAttack(event) && hasInventoryOpen) {
             fail();
             if (cancelHits) {
                 event.setCancelled(true);

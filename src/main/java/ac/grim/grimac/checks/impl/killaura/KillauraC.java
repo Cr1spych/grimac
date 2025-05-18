@@ -19,10 +19,10 @@ public class KillauraC extends Check implements PacketCheck {
 
     @Override
     public void onPacketReceive(PacketReceiveEvent event) {
-        if (Packet.isInteract(event)) {
+        if (Packet.isCInteract(event)) {
             interact = true;
         }
-        if (Packet.isAttack(event)) {
+        if (Packet.isCAttack(event)) {
             if (!interact) {
                 fail();
                 if (cancelHits) {
