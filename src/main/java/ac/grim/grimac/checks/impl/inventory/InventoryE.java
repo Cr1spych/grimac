@@ -14,29 +14,22 @@ public class InventoryE extends Check implements PacketCheck {
         super(player);
     }
 
-    private boolean hasInventoryOpen;
-    private boolean cancelHits;
+    private boolean cancelClicks;
 
     @Override
     public void onPacketReceive(PacketReceiveEvent event) {
         if (Packet.isClickWindow(event)) {
-            hasInventoryOpen = true;
-        }
-
-        if (Packet.isCloseWindow(event)) {
-            hasInventoryOpen = false;
-        }
-
-        if ((player.packetStateData.isSlowedByUsingItem() && player.packetStateData.lastSlotSelected == player.packetStateData.getSlowedByUsingItemSlot()) && hasInventoryOpen) {
-            fail();
-            if (cancelHits) {
-                event.setCancelled(true);
+            if (player.packetStateData.isSlowedByUsingItem() && player.packetStateData.lastSlotSelected == player.packetStateData.getSlowedByUsingItemSlot()) {
+                fail();
+                if (cancelClicks) {
+                    event.setCancelled(true);
+                }
             }
         }
     }
 
     @Override
     public void onReload(ConfigManager configManager) {
-        this.cancelHits = configManager.getBooleanElse("InventoryE.cancelHits", true);
+        this.cancelClicks = configManager.getBooleanElse("InventoryE.cancelClicks", true);
     }
 }

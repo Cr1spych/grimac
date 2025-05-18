@@ -44,7 +44,7 @@ InventoryD:
     buffer: 2.0
 
 InventoryE:
-    cancelHits: true
+    cancelClicks: true
 
 #-----------------#
 # Killaura        #
