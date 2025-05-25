@@ -1,4 +1,4 @@
-package ac.grim.grimac.checks.impl.aim;
+package ac.grim.grimac.checks.impl.aim.grim;
 
 import ac.grim.grimac.checks.Check;
 import ac.grim.grimac.checks.CheckData;

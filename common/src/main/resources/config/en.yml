@@ -4,6 +4,16 @@
 # Modified binaries, or plugins with copied grim code, must be private,
 # or with full source code available to buyers at no additional cost.
 
+Aim:
+    AimA:
+        ignoreCinematicMode: false
+    AimB:
+        buffer: 1.0
+    AimC:
+        buffer: 2.0
+    AimD:
+        ignoreCinematicMode: false
+
 alerts:
     # In addition to broadcasting alerts to players, should they also be sent to the console?
     print-to-console: true

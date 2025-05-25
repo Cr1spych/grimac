@@ -2,9 +2,14 @@ package ac.grim.grimac.manager;
 
 import ac.grim.grimac.GrimAPI;
 import ac.grim.grimac.api.AbstractCheck;
-import ac.grim.grimac.checks.impl.aim.AimDuplicateLook;
-import ac.grim.grimac.checks.impl.aim.AimModulo360;
+import ac.grim.grimac.checks.impl.aim.AimA;
+import ac.grim.grimac.checks.impl.aim.AimB;
+import ac.grim.grimac.checks.impl.aim.AimC;
+import ac.grim.grimac.checks.impl.aim.AimD;
+import ac.grim.grimac.checks.impl.aim.grim.AimDuplicateLook;
+import ac.grim.grimac.checks.impl.aim.grim.AimModulo360;
 import ac.grim.grimac.checks.impl.aim.processor.AimProcessor;
+import ac.grim.grimac.checks.impl.aim.processor.CinematicProcessor;
 import ac.grim.grimac.checks.impl.badpackets.*;
 import ac.grim.grimac.checks.impl.breaking.AirLiquidBreak;
 import ac.grim.grimac.checks.impl.breaking.FarBreak;
@@ -187,8 +192,13 @@ public class CheckManager {
                 .build();
         rotationCheck = new ImmutableClassToInstanceMap.Builder<RotationCheck>()
                 .put(AimProcessor.class, new AimProcessor(player))
+                .put(CinematicProcessor.class, new CinematicProcessor(player))
                 .put(AimModulo360.class, new AimModulo360(player))
                 .put(AimDuplicateLook.class, new AimDuplicateLook(player))
+                .put(AimA.class, new AimA(player))
+                .put(AimB.class, new AimB(player))
+                .put(AimC.class, new AimC(player))
+                .put(AimD.class, new AimD(player))
 //                .put(Baritone.class, new Baritone(player))
                 .build();
         vehicleCheck = new ImmutableClassToInstanceMap.Builder<VehicleCheck>()

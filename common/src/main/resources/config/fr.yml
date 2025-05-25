@@ -1,18 +1,28 @@
-# Configuration principale de GrimAC
-# Code source : https://github.com/MWHunter/Grim
-# Copyright 2025 DefineOutside et contributeurs, sous licence GPLv3.
-# Les binaires modifiés, ou les plugins contenant du code grim copié, doivent être privés,
-# ou avec le code source complet disponible pour les acheteurs sans frais supplémentaires.
+# GrimAC main configuration
+# Source code: https://github.com/MWHunter/Grim
+# Copyright 2025 DefineOutside and contributors, Licensed under GPLv3.
+# Modified binaries, or plugins with copied grim code, must be private,
+# or with full source code available to buyers at no additional cost.
+
+Aim:
+    AimA:
+        ignoreCinematicMode: false
+    AimB:
+        buffer: 1.0
+    AimC:
+        buffer: 2.0
+    AimD:
+        ignoreCinematicMode: false
 
 alerts:
-    # En plus de diffuser des alertes aux joueurs, doivent-elles également être afffichées dans console ?
+    # In addition to broadcasting alerts to players, should they also be sent to the console?
     print-to-console: true
-    # Cela contrôle la manière dont les alertes sont partagées entre les serveurs connectés à votre proxy.
-    # Vous devez avoir activé 'bungee-plugin-message-channel' dans la configuration de Velocity si Velocity est utilisé.
+    # This controls whether/how alerts are shared between servers connected to your proxy.
+    # You must have 'bungee-plugin-message-channel' enabled in your Velocity's configuration if Velocity is in use.
     proxy:
-        # Les alertes doivent-elles être envoyées aux autres serveurs connectés à votre proxy ?
+        # Should alerts be sent to other servers connected to your proxy?
         send: false
-        # Les alertes reçues des autres serveurs doivent-elles être annoncées sur ce serveur ?
+        # Should the alerts received from other servers be announced to this server?
         receive: false
 
 verbose:
@@ -21,7 +31,7 @@ verbose:
 check-for-updates: true
 
 client-brand:
-    # Cela signifie qu'il n'enverra pas la nature du client aux opérateurs si il correspond aux clients suivants
+    # This means it won't broadcast their brand to operators if the brand matches the following regexes
     ignored-clients:
         - "^vanilla$"
         - "^fabric$"
@@ -33,13 +43,13 @@ client-brand:
     disconnect-blacklisted-forge-versions: true
 
 spectators:
-    # Masquer tout les spectateurs ayant la permission grim.spectator, peu importe s'ils sont actuellement en train d'observer.
+    # Hide all spectators with the grim.spectator permission regardless if they are actually actively spectating
     hide-regardless: false
-    # Les spectateurs seront cachés uniquement dans ces mondes, laissez vide pour les afficher dans tous les mondes.
+    # Will make spectators hidden only in these worlds, keep blank to allow all worlds
     allowed-worlds:
         - ""
 
-# Au bout de combien de temps les joueurs doivent-ils être expulsés en cas de perte de connexion ? Défault = 60 secondes
+# How long should players have until we kick them for timing out? Default = 60 seconds
 max-transaction-time: 60
 
 # Should the duplicate movement packet be cancelled?
@@ -51,31 +61,31 @@ cancel-duplicate-packet: true
 ignore-duplicate-packet-rotation: false
 
 Simulation:
-    # De combien devons-nous multiplier l'avantage total lorsque le joueur est légitime ?
-    # Voici à quoi ressemble la configuration par défaut (l'axe x = secondes, l'axe y = 1/1000 de bloc) : https://www.desmos.com/calculator/d4ufgxrxer
+    # How much should we multiply total advantage by when the player is legit
+    # This is what the default config looks like (x axis = seconds, y axis = 1/1000 block): https://www.desmos.com/calculator/d4ufgxrxer
     setback-decay-multiplier: 0.999
-    # Quel est l'écart maximal par rapport au mouvement du joueur pour lequel nous devrions créer une violation ?
-    # Mesuré en blocs par rapport au mouvement possible.
-    # Nous prenons en compte Optifine en changeant les tables trigonométriques, mais en réduisant cela à 0.001, cela réduira les signalements de l'anticheat
-    # sur FastMath si cette compensation ne fonctionne pas...
+    # How large of an offset from the player's movement should we create a violation for?
+    # Measured in blocks from the possible movement
+    # We account for Optifine by switching trig tables but dropping this to 0.001 will reduce FastMath
+    # flagging the anticheat if this compensation doesn't work...
     threshold: 0.001
-    # Quelle est la distance maximale d'une violation par tick avant que le joueur ne soit immédiatement renvoyé en arrière ?
-    # -1 pour désactiver
+    # How large of a violation in a tick before the player gets immediately setback?
+    # -1 to disable
     immediate-setback-threshold: 0.1
-    # Quelle est la distance maximale d'une violation sur tout les ticks avant que l'anti-cheat commence à renvoyer en arrière ?
-    # -1 pour désactiver
+    # How large of an advantage over all ticks before we start to setback?
+    # -1 to disable
     max-advantage: 1
-    # Après 50 secondes avec la configuration par défaut, le joueur passera de 4 blocs -> 1 bloc d'avantage
-    # Cela vise à empêcher le joueur d'accumuler trop de violations et de ne jamais pouvoir toutes les réinitialiser.
-    # Plafond d'avantage par défaut (l"axe x = secondes, l'axe y = 1/1000 de bloc)) : https://www.desmos.com/calculator/4lovswdarj
+    # After 50 seconds with default config, the player will go from 4 blocks -> 1 block of advantage
+    # This is to stop the player from gathering too many violations and never being able to clear them all
+    # Default advantage ceiling (x axis = seconds, y axis = 1/1000 block): https://www.desmos.com/calculator/4lovswdarj
     max-ceiling: 4
-    # Seuil du niveau de violation pour le setback
-    # 1 pour le comportement ancien
+    # Violation level threshold for setback
+    # 1 for old behavior
     setback-violation-threshold: 1
 
-# Vérifications pour voir si un joueur est entré dans un bloc pendant un mouvement.
+# Checks to see if a player entered a block during a movement
 Phase:
-    setbackvl: 1 # Rentrer dans des blocs peut permettre de grimper sur les murs, et cette vérification est relativement stable.
+    setbackvl: 1 # Glitching into blocks can allow wall climbing, plus this check is relatively stable
     decay: 0.005
 
 AirLiquidPlace:
@@ -93,34 +103,33 @@ PositionPlace:
 RotationPlace:
     cancelvl: 5
 
-# Vérification de no-slow basée sur la prédiction.
-# Grim tient compte des problèmes de netcode ici... difficile à tromper même en spamant le clic droit et le bouton de la main secondaire.
-# Bien plus stable que les autres anti-triche, mais veuillez signaler toute fausse détection... J'ai corrigé de nombreux problèmes de netcode ici.
+# Prediction-based no slow check
+# Grim accounts for buggy netcode here... hard to false even when spamming right click and offhand button
+# Much more stable than other anticheats, but please report any falses... I have fixed a ton of netcode issues here.
 NoSlow:
-    # Quel est le niveau d'écart considéré comme "triche"
-    # Par défaut, cela est inférieur à d'autres écarts.
-    # Génère des avertissements avec des valeurs comprises entre 0,03 et 0,2 lors de l'utilisation de NoSlow
+    # How much of an offset is "cheating"
+    # By default this is lower than other offs
+    # Flags by 0.03-0.2 consistently with NoSlow on
     threshold: 0.001
-    # Renvoyer en arrière sur le premier objet pour éliminer tout avantage donné par NoSlow
+    # Setback fast on the first item to remove any advantage NoSlow gives
     setbackvl: 5
-    # Décroissance lorsque le joueur utilise un objet ET est ralenti par celui-ci.
+    # Decay's when the player uses an item AND is slowed by it
     decay: 0.05
 
 Knockback:
-    # De combien devons-nous multiplier l'avantage total lorsque le joueur est légitime ?
+    # How much should we multiply total advantage by when the player is legit
     setback-decay-multiplier: 0.999
-    # Quel est l'écart maximal par rapport au mouvement du joueur pour lequel nous devrions créer une violation ?
-    # Mesuré en blocs par rapport au mouvement possible.
+    # How large of an offset from the player's velocity should we create a violation for?
+    # Measured in blocks from the possible velocity
     threshold: 0.001
-    # Quelle est la distance maximale d'une violation par tick avant que le joueur ne soit immédiatement renvoyé en arrière ?
-    # -1 pour désactiver
+    # How large of a violation in a tick before the player gets immediately setback?
+    # -1 to disable
     immediate-setback-threshold: 0.1
-    # Quelle est la distance maximale d'une violation sur tout les ticks avant que l'anti-cheat commence à renvoyer en arrière ?
-    # -1 pour désactiver
+    # How large of an advantage over all ticks before we start to setback?
+    # -1 to disable
     max-advantage: 1
-    # Cela vise à empêcher le joueur d'accumuler trop de violations et de ne jamais pouvoir toutes les réinitialiser.
+    # This is to stop the player from gathering too many violations and never being able to clear them all
     max-ceiling: 4
-
 
 Explosion:
     threshold: 0.001
@@ -128,8 +137,8 @@ Explosion:
 
 TimerA:
     setbackvl: 10
-    # Le nombre de millisecondes que le joueur peut accumuler pour une utilisation ultérieure lorsqu'il prend du retard.
-    # Si la valeur est trop élevée, cela pourrait potentiellement permettre de contourner les mécaniques 1.8, comme l'utilisation rapide, la guérison rapide et le tir à l'arc rapide. Une valeur de 120 ms semble être un bon équilibre.
+    # Milliseconds that the player can accumulate for later use when they fall behind
+    # Could potentially allow 1.8 fast use/fast heal/fast bow bypasses if set too high, 120 ms seems like a good balance
     drift: 120
 
 # This check limits abuse of the TimerA balance by preventing the player's movement falling too far behind realtime
@@ -140,66 +149,70 @@ TimerLimit:
     ping-abuse-limit-threshold: 1000
 
 NegativeTimer:
-    # Le nombre de millisecondes perdus pendant le déplacement avant de commencer à signaler des infractions.
+    # Number of milliseconds lost while moving before we should start flagging
     drift: 1200
 
-# Même méthode de vérification que TimerA, mais pour les véhicules.
+# Same check method as TimerA, but for vehicles
 VehicleTimer:
-    # Cibler un chronomètre de 1,005.
+    # Target 1.005 timer
     setbackvl: 10
 
 PacketOrderI:
-    # Activer si les joueurs sont signalés pour l'utilisation de mods d'animation 1.7
+    # enable if players are getting flagged for using 1.7 animations mods
     exempt-placing-while-digging: false
 
 Reach:
-    # De combien devrions-nous agrandir les hitboxes ? Une augmentation de 0,0005 devrait détecter une portée de 3,0005 ou plus.
+    # How much should we expand hitboxes by? 0.0005 should detect 3.0005+ reach
     #
-    # Il y a un agrandissement forcé de 0,03 avec les versions 1.9 à 1.18.1 (pas 1.18.2) ou certaines combinaisons client/serveur en raison
-    # des changements et limitations du protocole. Cette vérification est particulièrement puissante avec les clients 1.7/1.8 sur les serveurs 1.8.
+    # There is 0.03 forced expansion with 1.9-1.18.1 (not 1.18.2), or some client/server combinations due to
+    # protocol changes and limitations. This check is most powerful with 1.7/1.8 clients on 1.8 servers.
     threshold: 0.0005
-    # Devons-nous annuler les coups que nous savons impossibles ?
-    # Les coups entre 3,00 et 3,03 peuvent passer mais seront quand même signalés en raison des limitations de l'ordre des paquets.
+    # Should we cancel hits that we know are impossible?
+    # 3.00-3.03 hits may go through but still be flagged, due to packet order limitations
     block-impossible-hits: true
-    # Cela enverra un paquet supplémentaire à la fin de chaque tick pour augmenter les chances de détecter les triches.
-    # Cela s'injecte dans la liste de connexions du serveur pour envoyer un dernier paquet juste avant que le serveur ne le vide.
-    # Activer cette fonctionnalité augmentera l'utilisation de la bande passante pour tous les joueurs.
-    # Cela n'entraînera pas de diminution des performances globales du serveur.
-    # Activer cette fonctionnalité permettra de détecter davantage de tricheurs.
-    # Laisser cette fonctionnalité désactivée permettra tout de même de détecter les tricheurs et n'entraînera pas de faux positifs.
-    # À moins d'être un serveur axé sur le PvP en 1.8, l'envoi de ce paquet supplémentaire n'est pas recommandé.
+    # This will send an additional packet at the end of every tick to increase the likelihood of catching cheats
+    # This injects into server's connection list to send a final packet just before the server flushes
+    # Enabling this will increase bandwidth usage for all players
+    # This will not decrease overall server performance
+    # Enabling this will catch more cheaters.
+    # Leaving this disabled will still catch cheaters and will not cause false positives
+    # Unless you are a 1.8 PvP focused server, this additional packet is not recommended
     enable-post-packet: false
 
 exploit:
+    # You can gain high speeds when sprint jumping with an elytra, this prevents the exploit when set to false
+    # Mojang screwed up netcode by making elytra start client sided and elytra end server sided
+    # Elytras take 0.99 horizontal friction, so constantly adding 0.2 horizontal speeds results in very high speeds.
     allow-sprint-jumping-when-using-elytra: true
-    # Cette option atténue le placement du joueur sur les ghostblocks en resynchronisant le joueur lorsque cela se produit.
+    # This option mitigates the player's placement on ghostblocks by resynchronizing the player when it happens
     allow-building-on-ghostblocks: true
+    # This setting, influenced by the boolean above defines the distance to check for ghost blocks
+    # Its valid range is limited from 2 to 4
     distance-to-check-if-ghostblocks: 2
 
-# Activer l'enregistrement des plugins ayant injecté dans Netty lors de la connexion pour déboguer les problèmes de compatibilité
+# Enable logging plugins who have injected into netty on join to debug compatibility issues
 debug-pipeline-on-join: false
 
-# Active les vérifications expérimentales
+# Enables experimental checks
 experimental-checks: false
 
 reset-item-usage-on-item-update: true
 reset-item-usage-on-attack: true
 reset-item-usage-on-slot-change: true
 
-# Grim annule parfois des paquets illégaux, comme ceux liés au chronomètre, après avoir annulé X paquets en une seconde,
-# à partir de combien de paquets annulés devrions-nous simplement expulser le joueur ?
-# Cela est nécessaire car certains limiteurs de paquets ne comptent pas les paquets annulés par Grim.
+# Grim sometimes cancels illegal packets such as with timer, after X packets in a second cancelled, when should
+# we simply kick the player? This is required as some packet limiters don't count packets cancelled by grim.
 packet-spam-threshold: 100
-# Activez ceci pour afficher une trace de pile lorsqu’un joueur est expulsé à cause du packet-spam-threshold
+# Enable this to print a stacktrace when a player is kicked due to packet-spam-threshold
 debug-packet-cancel: false
 
-# Grim peut faire en sorte qu’un joueur sorti de l’état de vol n’ait pas plus de X ms de ping
-# Cela est dû au fait que Grim ne vérifie pas encore les joueurs en vol
-# Pour désactiver, utilisez -1
+# Grim is able to enforce that a player set out of flying state cannot have more than X milliseconds of ping
+# This is due to Grim not currently checking flying players
+# To disable, use -1
 max-ping-out-of-flying: 1000
 
-# Ping maximal lorsque la propulsion de feu d’artifice est retirée du joueur.
-# Cela empêche les joueurs à forte latence d’utiliser indéfiniment un seul boost de feu d’artifice avec une élytra.
+# Maximum ping when a firework boost is removed from the player.
+# This prevents high latency players from being able to use 1 firework boost with an elytra forever.
 max-ping-firework-boost: 1000
 
 config-version: 9
