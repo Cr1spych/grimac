@@ -14,6 +14,15 @@ Aim:
     AimD:
         ignoreCinematicMode: false
 
+Inventory:
+    InventoryA:
+        cancelClicks: true
+    InventoryB:
+        buffer: 2.0
+        clickDelay: 22 # 10-25 recommended
+    InventoryC:
+        cancelClicks: true
+
 alerts:
     # In addition to broadcasting alerts to players, should they also be sent to the console?
     print-to-console: true
