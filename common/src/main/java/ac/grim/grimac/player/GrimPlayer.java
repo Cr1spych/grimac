@@ -234,6 +234,7 @@ public class GrimPlayer implements GrimUser {
     public DimensionType dimensionType;
     public @Nullable String worldName;
     public Vector3d bedPosition;
+    public PTF trustFactor = PTF.DEFAULT;
     public long lastBlockPlaceUseItem = 0;
     public long lastBlockBreak = 0;
     public final AtomicInteger cancelledPackets = new AtomicInteger(0);

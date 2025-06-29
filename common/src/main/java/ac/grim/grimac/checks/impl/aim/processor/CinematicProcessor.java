@@ -28,8 +28,8 @@ public final class CinematicProcessor extends Check implements RotationCheck {
     public void process(final RotationUpdate rotationUpdate) {
         final long now = System.currentTimeMillis();
 
-        final double deltaXRot = rotationUpdate.getDeltaXRot();
-        final double deltaYRot = rotationUpdate.getDeltaYRot();
+        final double deltaXRot = rotationUpdate.getDeltaYawRot();
+        final double deltaYRot = rotationUpdate.getDeltaPitchRot();
 
         final double differenceYaw = Math.abs(deltaXRot - lastDeltaXRot);
         final double differencePitch = Math.abs(deltaXRot - lastDeltaYRot);

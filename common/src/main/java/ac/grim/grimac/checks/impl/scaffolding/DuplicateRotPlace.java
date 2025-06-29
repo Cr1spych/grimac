@@ -21,8 +21,8 @@ public class DuplicateRotPlace extends BlockPlaceCheck {
 
     @Override
     public void process(final RotationUpdate rotationUpdate) {
-        deltaX = rotationUpdate.getDeltaXRotABS();
-        deltaY = rotationUpdate.getDeltaYRotABS();
+        deltaX = rotationUpdate.getDeltaYawRotABS();
+        deltaY = rotationUpdate.getDeltaPitchRotABS();
         deltaDotsX = rotationUpdate.getProcessor().deltaDotsX;
         rotated = true;
     }

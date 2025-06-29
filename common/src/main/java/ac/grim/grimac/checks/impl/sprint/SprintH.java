@@ -1,4 +1,4 @@
-package ac.grim.grimac.checks.impl.badpackets;
+package ac.grim.grimac.checks.impl.sprint;
 
 import ac.grim.grimac.checks.Check;
 import ac.grim.grimac.checks.CheckData;
@@ -10,13 +10,13 @@ import com.github.retrooper.packetevents.protocol.packettype.PacketType;
 import com.github.retrooper.packetevents.protocol.player.GameMode;
 import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientEntityAction;
 
-@CheckData(name = "BadPacketsX", experimental = true)
-public class BadPacketsX extends Check implements PostPredictionCheck {
+@CheckData(name = "SprintH")
+public class SprintH extends Check implements PostPredictionCheck {
     private boolean sprint;
     private boolean sneak;
     private int flags;
 
-    public BadPacketsX(GrimPlayer player) {
+    public SprintH(GrimPlayer player) {
         super(player);
     }
 

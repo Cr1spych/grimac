@@ -5,6 +5,7 @@ import ac.grim.grimac.api.AbstractCheck;
 import ac.grim.grimac.api.config.ConfigManager;
 import ac.grim.grimac.api.event.events.FlagEvent;
 import ac.grim.grimac.player.GrimPlayer;
+import ac.grim.grimac.player.PTF;
 import com.github.retrooper.packetevents.protocol.packettype.PacketType;
 import com.github.retrooper.packetevents.protocol.packettype.PacketTypeCommon;
 import com.github.retrooper.packetevents.protocol.player.ClientVersion;
@@ -111,6 +112,12 @@ public class Check extends GrimProcessor implements AbstractCheck {
         return flagWithSetback("");
     }
 
+    // отправка статуса игрока. и, да, я ебланище, мне лень писать нормальный метод
+    public void sendTrustFactor() {
+        PTF currentTf = player.trustFactor;
+        if (player.hasPermission("grim.alerts"));
+    }
+
     public final boolean flagWithSetback(String verbose) {
         if (flag(verbose)) {
             setbackIfAboveSetbackVL();
@@ -208,5 +215,4 @@ public class Check extends GrimProcessor implements AbstractCheck {
 
         return isFlying(packetType);
     }
-
 }

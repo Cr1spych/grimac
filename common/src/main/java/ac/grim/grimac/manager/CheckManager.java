@@ -2,10 +2,9 @@ package ac.grim.grimac.manager;
 
 import ac.grim.grimac.GrimAPI;
 import ac.grim.grimac.api.AbstractCheck;
-import ac.grim.grimac.checks.impl.aim.AimA;
-import ac.grim.grimac.checks.impl.aim.AimB;
-import ac.grim.grimac.checks.impl.aim.AimC;
-import ac.grim.grimac.checks.impl.aim.AimD;
+import ac.grim.grimac.checks.impl.aim.AimNonFinite;
+import ac.grim.grimac.checks.impl.aim.AimRounded;
+import ac.grim.grimac.checks.impl.packetorder.PacketOrderO;
 import ac.grim.grimac.checks.impl.aim.grim.AimDuplicateLook;
 import ac.grim.grimac.checks.impl.aim.grim.AimModulo360;
 import ac.grim.grimac.checks.impl.aim.processor.AimProcessor;
@@ -62,12 +61,7 @@ import ac.grim.grimac.checks.impl.scaffolding.InvalidPlaceB;
 import ac.grim.grimac.checks.impl.scaffolding.MultiPlace;
 import ac.grim.grimac.checks.impl.scaffolding.PositionPlace;
 import ac.grim.grimac.checks.impl.scaffolding.RotationPlace;
-import ac.grim.grimac.checks.impl.sprint.SprintA;
-import ac.grim.grimac.checks.impl.sprint.SprintB;
-import ac.grim.grimac.checks.impl.sprint.SprintC;
-import ac.grim.grimac.checks.impl.sprint.SprintD;
-import ac.grim.grimac.checks.impl.sprint.SprintE;
-import ac.grim.grimac.checks.impl.sprint.SprintF;
+import ac.grim.grimac.checks.impl.sprint.*;
 import ac.grim.grimac.checks.impl.timer.NegativeTimer;
 import ac.grim.grimac.checks.impl.timer.TickTimer;
 import ac.grim.grimac.checks.impl.timer.Timer;
@@ -149,7 +143,7 @@ public class CheckManager {
                 .put(BadPacketsC.class, new BadPacketsC(player))
                 .put(BadPacketsD.class, new BadPacketsD(player))
                 .put(BadPacketsE.class, new BadPacketsE(player))
-                .put(BadPacketsF.class, new BadPacketsF(player))
+                .put(SprintG.class, new SprintG(player))
                 .put(BadPacketsG.class, new BadPacketsG(player))
                 .put(BadPacketsI.class, new BadPacketsI(player))
                 .put(BadPacketsJ.class, new BadPacketsJ(player))
@@ -164,15 +158,15 @@ public class CheckManager {
                 .put(BadPacketsT.class, new BadPacketsT(player))
                 .put(BadPacketsU.class, new BadPacketsU(player))
                 .put(BadPacketsV.class, new BadPacketsV(player))
-                .put(BadPacketsY.class, new BadPacketsY(player))
+                .put(BadPacketsF.class, new BadPacketsF(player))
                 .put(MultiActionsA.class, new MultiActionsA(player))
                 .put(MultiActionsB.class, new MultiActionsB(player))
                 .put(MultiActionsC.class, new MultiActionsC(player))
                 .put(MultiActionsD.class, new MultiActionsD(player))
                 .put(MultiActionsE.class, new MultiActionsE(player))
                 .put(MultiActionsG.class, new MultiActionsG(player))
-                .put(PacketOrderB.class, new PacketOrderB(player))
-                .put(PacketOrderC.class, new PacketOrderC(player))
+                .put(PacketOrderO.class, new PacketOrderO(player))
+                .put(PacketOrderM.class, new PacketOrderM(player))
                 .put(PacketOrderD.class, new PacketOrderD(player))
                 .put(SprintA.class, new SprintA(player))
                 .put(VehicleA.class, new VehicleA(player))
@@ -195,10 +189,8 @@ public class CheckManager {
                 .put(CinematicProcessor.class, new CinematicProcessor(player))
                 .put(AimModulo360.class, new AimModulo360(player))
                 .put(AimDuplicateLook.class, new AimDuplicateLook(player))
-                .put(AimA.class, new AimA(player))
-                .put(AimB.class, new AimB(player))
-                .put(AimC.class, new AimC(player))
-                .put(AimD.class, new AimD(player))
+                .put(AimRounded.class, new AimRounded(player))
+                .put(AimNonFinite.class, new AimNonFinite(player))
 //                .put(Baritone.class, new Baritone(player))
                 .build();
         vehicleCheck = new ImmutableClassToInstanceMap.Builder<VehicleCheck>()
@@ -221,12 +213,12 @@ public class CheckManager {
                 .put(PacketOrderJ.class, new PacketOrderJ(player))
                 .put(PacketOrderK.class, new PacketOrderK(player))
                 .put(PacketOrderL.class, new PacketOrderL(player))
-                .put(PacketOrderM.class, new PacketOrderM(player))
+                .put(PacketOrderC.class, new PacketOrderC(player))
                 .put(GroundSpoof.class, new GroundSpoof(player))
                 .put(OffsetHandler.class, new OffsetHandler(player))
                 .put(SuperDebug.class, new SuperDebug(player))
                 .put(DebugHandler.class, new DebugHandler(player))
-                .put(BadPacketsX.class, new BadPacketsX(player))
+                .put(SprintH.class, new SprintH(player))
                 .put(NoSlow.class, new NoSlow(player))
                 .put(SprintB.class, new SprintB(player))
                 .put(SprintC.class, new SprintC(player))
@@ -262,7 +254,7 @@ public class CheckManager {
                 .put(FabricatedPlace.class, new FabricatedPlace(player))
                 .put(PositionPlace.class, new PositionPlace(player))
                 .put(RotationPlace.class, new RotationPlace(player))
-                .put(PacketOrderN.class, new PacketOrderN(player))
+                .put(PacketOrderB.class, new PacketOrderB(player))
                 .put(DuplicateRotPlace.class, new DuplicateRotPlace(player))
                 .put(GhostBlockMitigation.class, new GhostBlockMitigation(player))
                 .build();

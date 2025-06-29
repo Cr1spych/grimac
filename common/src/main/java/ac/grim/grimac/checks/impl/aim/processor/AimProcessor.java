@@ -39,7 +39,7 @@ public class AimProcessor extends Check implements RotationCheck {
         rotationUpdate.setProcessor(this);
 
 
-        float deltaXRot = rotationUpdate.getDeltaXRotABS();
+        float deltaXRot = rotationUpdate.getDeltaYawRotABS();
 
         this.divisorX = GrimMath.gcd(deltaXRot, lastXRot);
         if (deltaXRot > 0 && deltaXRot < 5 && divisorX > GrimMath.MINIMUM_DIVISOR) {
@@ -48,7 +48,7 @@ public class AimProcessor extends Check implements RotationCheck {
         }
 
 
-        float deltaYRot = rotationUpdate.getDeltaYRotABS();
+        float deltaYRot = rotationUpdate.getDeltaPitchRotABS();
 
         this.divisorY = GrimMath.gcd(deltaYRot, lastYRot);
 

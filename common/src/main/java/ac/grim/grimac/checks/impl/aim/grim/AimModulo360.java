@@ -24,16 +24,16 @@ public class AimModulo360 extends Check implements RotationCheck {
         // after forced, client-sided rotation change after interacting with a horse (not necessarily mounting it)
         if (player.packetStateData.lastPacketWasTeleport || player.vehicleData.wasVehicleSwitch
                 || player.packetStateData.horseInteractCausedForcedRotation) {
-            lastDeltaYaw = rotationUpdate.getDeltaXRot();
+            lastDeltaYaw = rotationUpdate.getDeltaYawRot();
             return;
         }
 
-        if (player.xRot < 360 && player.xRot > -360 && Math.abs(rotationUpdate.getDeltaXRot()) > 320 && Math.abs(lastDeltaYaw) < 30) {
+        if (player.xRot < 360 && player.xRot > -360 && Math.abs(rotationUpdate.getDeltaYawRot()) > 320 && Math.abs(lastDeltaYaw) < 30) {
             flagAndAlert();
         } else {
             reward();
         }
 
-        lastDeltaYaw = rotationUpdate.getDeltaXRot();
+        lastDeltaYaw = rotationUpdate.getDeltaYawRot();
     }
 }
