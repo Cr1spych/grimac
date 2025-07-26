@@ -17,7 +17,10 @@ public class AimRounded extends Check implements RotationCheck {
         float deltaYaw = update.getDeltaYawRotABS();
         float deltaPitch = update.getDeltaPitchRotABS();
 
-        if ((deltaYaw == Math.round(deltaYaw) && deltaYaw != 0) || (deltaPitch == Math.round(deltaPitch)) && deltaPitch != 0) {
+        boolean roundedYaw = deltaYaw % 1 == 0;
+        boolean roundedPitch = deltaPitch % 1 == 0;
+
+        if ((roundedYaw && deltaYaw != 0) || (roundedPitch && deltaPitch != 0)) {
             flagAndAlert();
         }
     }
