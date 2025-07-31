@@ -2,9 +2,8 @@ package ac.grim.grimac.manager;
 
 import ac.grim.grimac.GrimAPI;
 import ac.grim.grimac.api.AbstractCheck;
-import ac.grim.grimac.checks.impl.aim.AimNonFinite;
-import ac.grim.grimac.checks.impl.aim.AimRounded;
-import ac.grim.grimac.checks.impl.aim.AimSnap;
+import ac.grim.grimac.checks.impl.aim.AimConsistency;
+import ac.grim.grimac.checks.impl.aim.AimComplex;
 import ac.grim.grimac.checks.impl.packetorder.PacketOrderO;
 import ac.grim.grimac.checks.impl.aim.grim.AimDuplicateLook;
 import ac.grim.grimac.checks.impl.aim.grim.AimModulo360;
@@ -190,9 +189,8 @@ public class CheckManager {
                 .put(CinematicProcessor.class, new CinematicProcessor(player))
                 .put(AimModulo360.class, new AimModulo360(player))
                 .put(AimDuplicateLook.class, new AimDuplicateLook(player))
-                .put(AimRounded.class, new AimRounded(player))
-                .put(AimNonFinite.class, new AimNonFinite(player))
-                .put(AimSnap.class, new AimSnap(player))
+                .put(AimConsistency.class, new AimConsistency(player))
+                .put(AimComplex.class, new AimComplex(player))
 //                .put(Baritone.class, new Baritone(player))
                 .build();
         vehicleCheck = new ImmutableClassToInstanceMap.Builder<VehicleCheck>()
